@@ -1,0 +1,26 @@
+package commandMenu;
+
+public abstract class Command implements Cloneable {
+
+	protected abstract void executeImpl();
+	
+	public Command(){}
+	
+	public void execute()
+	{
+		executeImpl();
+	}
+	
+
+	@Override
+	public Command clone() {
+		try {
+			return (Command) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+}
+

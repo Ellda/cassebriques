@@ -1,0 +1,15 @@
+package gameState;
+
+/**
+ * 
+ * This interface is used to define the different states of the game.
+ * 
+ * @author Antoine Fonfria, Baptiste Jaeckert
+ *
+ */
+
+public interface GameState {
+
+	public void runGame();
+	
+}

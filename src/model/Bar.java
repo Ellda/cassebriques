@@ -1,0 +1,136 @@
+package model;
+
+import java.awt.Rectangle;
+
+import executer.Executer;
+
+/**
+ * Defines the objet Bar.
+ * 
+ * @author Antoine Fonfria - 14 129 748
+ * @author Baptiste Jaeckert 14 129 775
+ * @author Jonathan Diaz-Muy 13 041 479
+ * @author Adrien Burel 14 126 607
+ * @author Landry Modeste Goutondji  14 000 626
+ * @author Jérémy Collard 14 129 766
+ * @author Mentor Bajraktari 14 129 757
+ * @author Olivier Scheffler 12 179 288
+ * @author Elliot Gémus-Prévost 13 111 198
+ * @author Samuel Arseneault 13 161 801
+ * @author Djenebou Monique Dembele 10 103 210
+ * @author Florent Gargot 14 129 784
+ */
+
+public class Bar {
+
+	private int x, y;
+	private int width = 100;
+	private int height = 15;
+	private int speed = 10;
+	private int ballCollisionCounter;
+	
+	public Bar() {
+		this.x = Executer.WIN_WIDTH / 2; // Initial position in the middle
+		this.y = Executer.WIN_HEIGHT - 100;
+		ballCollisionCounter = 0;
+	}
+
+	public Bar(int x, int y) {
+		this.x = x;
+		this.y = y;
+		ballCollisionCounter = 0;
+	}
+
+	/*
+	 * Setters
+	 */
+	public void setX(int newX) {
+		if (newX + width/2 < Executer.WIN_WIDTH && newX - width/2 > 0) {
+			x = newX;
+		}
+
+	}
+
+	public void setY(int newY) {
+		if (newY < Executer.WIN_HEIGHT && newY > 0) {
+			y = newY;
+		}
+	}
+
+	public void setWidth(int newWidth) {
+		width = newWidth;
+	}
+
+	public void setSpeed(int newSpeed) {
+		speed = newSpeed;
+	}
+
+	public void setCounter(int newCounter){
+		ballCollisionCounter = newCounter;
+	}
+	
+	/*
+	 * Getters
+	 */
+	public int getX() {
+		return x;
+	}
+	
+	public int getCounter(){
+		return ballCollisionCounter;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public Rectangle getBounds()
+	{
+		return new Rectangle(getX(),getY(), getWidth(), getHeight());
+	}
+	
+	public void incCounter(){
+		this.ballCollisionCounter++;
+	}
+	
+	public int getTopY(){
+		return y - height/2;
+	}
+	
+	/**
+	 * Return true if the segment (x1, x2) is within the bar
+	 * @param x1
+	 * @param x2
+	 * @return
+	 */
+	public boolean isWithinBarRange(double x1, double x2){
+		return x2 >= x - width/2 && x1 <= x + width/2;
+	}
+
+	/**
+	 * Return the distance in percentage of the xPos from the center of the bar
+	 * 0% is at the center, 100% is at one of the extremity
+	 * @param xPos
+	 * @return
+	 */
+	public double getDistanceFromCenter(double xPos) {
+		return (Math.abs(xPos - x)*100)/(width/2);
+	}
+	
+	public boolean isOnTheRight(double xPos){
+		return xPos >= x;
+	}
+
+}

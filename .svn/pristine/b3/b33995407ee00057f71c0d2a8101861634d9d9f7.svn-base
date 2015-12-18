@@ -1,0 +1,35 @@
+package gameState;
+
+import controller.GameController;
+
+/**
+ * 
+ * This transitional state is called when the player loses a life. It stops the timer and
+ * calls the appropriate method in the controler.
+ * 
+ * @author Antoine Fonfria, Baptiste Jaeckert
+ *
+ */
+
+public class NewLifeGameState implements GameState {
+
+	private GameController gameController;
+
+	public NewLifeGameState(GameController gameController) {
+		this.gameController = gameController;
+	}
+
+	@Override
+	public void runGame() {
+
+		System.out.println("Vie perdue");
+
+		// Stop of the game timer
+		gameController.getTimer().cancel();
+
+		// Change state to playing
+		gameController.newLifeGame();
+
+	}
+
+}

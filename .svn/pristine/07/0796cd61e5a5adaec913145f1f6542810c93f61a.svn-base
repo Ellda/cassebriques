@@ -1,0 +1,130 @@
+package testsControler;
+
+import static org.junit.Assert.*;
+import model.Ball;
+import model.Bar;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import view.MainFrame;
+import controller.BallController;
+import controller.Collision;
+import executer.Executer;
+
+public class BallControlerTest {
+
+	private BallController ballController;
+	private Ball ball;
+	private Ball ballC;
+	private Bar barC ;
+	private MainFrame frame;
+	private Collision collision ;
+	private Executer execter ;
+	
+	@Before
+	public void setUp() throws Exception {
+		ball = new Ball();
+		ballC = new Ball(200,300);
+		barC = new Bar(200, 339) ;
+		frame = new MainFrame();
+		ballController = new BallController(ball, frame);
+		collision = new Collision(frame) ;
+
+		
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testBallControler() throws Exception {
+		setUp();
+		testMoveX();
+		testMoveY();
+		tearDown();
+	}
+	
+	@Test
+	public void testMoveX(){
+		ball.setX(50);
+		ball.setSpeed(10);
+		ball.setRadius(5);
+		ball.setxDir(1);
+		ballController.moveX();
+		//X calculé selon les informations à la main
+		double tempX = 57.071067811865476;
+		assertEquals(tempX, ball.getX(), 3);
+		
+		ball.setxDir(-1);
+		ballController.moveX();
+		assertTrue(ball.getX() == 50 );
+		
+		ball.setX(6);
+		ballController.moveX();
+		assertTrue(ball.getxDir() == 1);
+		//X calculé selon les informations à la main
+		tempX = 0.9289321881345245;
+		
+		assertEquals(tempX, ball.getX(), 3);
+		
+		ball.setX(792);
+		ball.setxDir(1);
+		ballController.moveX();
+		//X calculé selon les informations à la main
+		tempX = 778.9289321881345;
+		
+		assertEquals(tempX, ball.getX(), 3);
+	}
+	
+	@Test
+	public void testMoveY(){
+		ball.setY(50);
+		ball.setAngle(30);
+		ball.setSpeed(10);
+		ball.setRadius(10);
+		ball.setyDir(1);
+
+		
+		ballController.moveY();
+		//Y calculé selon les informations à la main
+		double tempY = 55;
+		
+		assertEquals(tempY, ball.getY(), 3);
+		
+		ball.setyDir(-1);
+		ballController.moveY();
+		assertTrue(ball.getY() == 50 );
+		
+		ball.setY(11);
+		ballController.moveY();
+		//Y calculé selon les informations à la main
+		tempY = 9.464466094067262;
+		
+		assertEquals(tempY, ball.getY(), 3);
+		
+		ball.setY(587);
+		ball.setyDir(1);
+		ballController.moveY();
+		//Y calculé selon les informations à la main
+		tempY = 577.4644660940672;
+		
+		assertEquals(tempY, ball.getY(), 3);
+	}
+	
+	/*@Test
+	public void testCollision(){
+		assertTrue(collision.intersect_haut(barC, ballC));
+		
+		ballC.setY(339);
+		ballC.setX(159);
+		assertTrue(collision.intersect_gauche(barC, ballC));
+		
+		ballC.setY(339);
+		ballC.setX(301);
+		assertTrue(collision.intersect_droite(barC, ballC));
+		
+	}*/
+}

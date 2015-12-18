@@ -1,0 +1,62 @@
+package controller;
+
+import java.util.ArrayList;
+
+import view.MainFrame;
+import model.Ball;
+import model.Bar;
+import model.Brick;
+import model.Grid;
+
+public class Collision {
+	
+	private MainFrame mainFrame;
+	private int collisionCoord;
+	private Grid grid;
+	
+	public Collision(MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
+		grid = Grid.getInstance();
+	}
+	
+	public boolean intersect_haut(Bar bar, double newY) // Collision with the top of the bar
+	{
+		Ball ball = mainFrame.getBall();
+		if(newY + ball.getRadius() > bar.getTopY() && ball.getY() + ball.getRadius() > bar.getTopY()){
+			return bar.isWithinBarRange(ball.getX()-ball.getRadius(), ball.getX() + ball.getRadius());
+		}
+		return false;
+	}
+	
+	public Brick collision_brickX(double newX) {
+		ArrayList<Brick> listOfBricks = mainFrame.getBricks();
+		Ball ball = mainFrame.getBall();
+		for(Brick br : listOfBricks){
+			if(grid.isWithinRangeX(br, newX - ball.getRadius(), newX + ball.getRadius()) && grid.isWithinRangeY(br, ball.getyTop(), ball.getyBottom())){
+				return br;
+			}
+		}
+		return null;
+	}
+	
+	public Brick collision_brickY(double newY) {
+		ArrayList<Brick> listOfBricks = mainFrame.getBricks();
+		Ball ball = mainFrame.getBall();
+		for(Brick br : listOfBricks){
+			if(grid.isWithinRangeY(br, newY-ball.getRadius(), newY+ball.getRadius()) && grid.isWithinRangeX(br, ball.getxLeft(), ball.getxRight())){
+				return br;
+			}
+		}
+		return null;
+	}
+	
+	
+	public void setCollisionCoord(int newCoord){
+		this.collisionCoord = newCoord;
+	}
+	public int getCollisionCoord(){
+		return this.collisionCoord;
+	}
+	
+	
+}

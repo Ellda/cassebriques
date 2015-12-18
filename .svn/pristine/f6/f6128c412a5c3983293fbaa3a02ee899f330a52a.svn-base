@@ -1,0 +1,45 @@
+package testsControler;
+
+import model.Ball;
+import model.Bar;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import view.MainFrame;
+import controller.Collision;
+
+public class testCollision {
+	private Collision collisionTest;
+	private MainFrame frame;
+	private Ball ball;
+	private Bar bar;
+	
+	
+	@Before
+	public void setUp(){
+		frame = new MainFrame();
+		ball = new Ball();
+		bar = new Bar();
+		frame.setBall(ball);
+		frame.setBar(bar);
+		collisionTest = new Collision(frame);
+	}
+	
+	@After
+	public void tearDown(){
+		frame=null;
+		ball=null;
+		bar=null;
+		collisionTest=null;
+	}
+	
+	
+	@Test
+	public void test_intersect_haut(){
+		
+	}
+	
+	
+}

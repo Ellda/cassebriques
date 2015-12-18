@@ -1,0 +1,28 @@
+package gameState;
+
+import controller.GameController;
+
+/**
+ * 
+ * This transitional State is called only once when the game is launched.
+ * It automatically switch to the playing state.
+ * 
+ * @author Antoine Fonfria, Baptiste Jaeckert
+ *
+ */
+
+public class NewGameState implements GameState {
+
+	private GameController gameController;
+
+	public NewGameState(GameController gameController) {
+		this.gameController = gameController;
+	}
+
+	@Override
+	public void runGame() {
+		System.out.println("Lancement initial");
+		gameController.setGameState(gameController.getPlayingGameState());
+	}
+
+}

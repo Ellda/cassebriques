@@ -1,0 +1,87 @@
+package gameState;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import view.Menu;
+import controller.BallController;
+import controller.BarController;
+import controller.BrickController;
+import controller.GameController;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+/**
+ * 
+ * This 'pause' state is called when the game is over. It stops the timer and displays a
+ * option panel. According to the answer given by the user, it can switch to a
+ * new game or close the program.
+ * 
+ * @author Antoine Fonfria, Baptiste Jaeckert
+ *
+ */
+
+public class OverGameState implements GameState {
+
+	private GameController gameController;
+
+	public OverGameState(GameController gameController) {
+		this.gameController = gameController;
+	}
+
+	@Override
+	public void runGame() {
+
+		System.out.println("Game Over");
+		
+	    String soundName = "sounds\\727.wav";
+	    try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+			Clip clip;
+			try {
+				clip = AudioSystem.getClip();
+				clip.open(audioInputStream);
+				clip.start();
+			} catch (LineUnavailableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Stop of the game timer
+		gameController.getTimer().cancel();
+
+		// Ask window if new game
+		int option = JOptionPane.showConfirmDialog(gameController.getView(),
+				"Vous avez perdu ! Voulez vous rejouer ?", "Game Over",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+		// If yes : reseting and restart timer
+		if (option == JOptionPane.YES_OPTION) {
+		
+			gameController.initGame();
+
+		} else {
+						
+			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(gameController.getView());
+			topFrame.dispose();
+			Menu.getInstance().setVisible(true);
+		}
+
+	}
+
+}

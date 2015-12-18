@@ -1,0 +1,45 @@
+package gameState;
+
+import controller.GameController;
+
+/**
+ * 
+ * This principal state is called when the game is playing. It can change to game over or
+ * new life if the ball dies.
+ * 
+ * @author Antoine Fonfria, Baptiste Jaeckert
+ *
+ */
+
+public class PlayingGameState implements GameState {
+
+	private GameController gameController;
+
+	public PlayingGameState(GameController gameController) {
+		this.gameController = gameController;
+	}
+
+	@Override
+	public void runGame() {
+
+		gameController.getGame().getBarController().refresh();
+		gameController.getGame().getBrickController().refresh();
+		gameController.getGame().getBallController().refresh();
+
+		gameController.updateInfosView();
+
+		if (gameController.getGame().getBall().getAlive() == false) {
+
+			gameController.decLife();
+			gameController.updateInfosView();
+
+			if (gameController.getGame().getLife() <= 0) {
+				gameController.setGameState(gameController.getOverGameState());
+			} else {
+				gameController.setGameState(gameController.getNewLifeGameState());
+			}
+
+		}
+	}
+
+}

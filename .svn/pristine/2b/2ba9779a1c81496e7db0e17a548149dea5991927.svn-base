@@ -1,0 +1,12 @@
+package commandMenu;
+
+public class ButtonQuitter extends Command{
+
+	@Override
+	protected void executeImpl() {
+		// TODO Auto-generated method stub
+		System.exit(0);
+		
+	}
+
+}

@@ -1,0 +1,86 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import commandMenu.*;
+import executer.Executer;
+
+public class Menu extends JFrame{
+	private static Menu instance = null ;
+	private CommandButton jButtonLancerPartie ;
+	private CommandButton jButtonAPropos ;
+	private CommandButton jButtonQuitter ;
+	
+	public synchronized static Menu getInstance(){
+		if(instance == null)
+			instance =  new Menu() ;
+		return instance ;
+	}
+	
+	public Menu(){
+	    setTitle("Casse-briques XP - Menu principal");
+	
+		setPreferredSize(new Dimension(Executer.WIN_WIDTH, Executer.WIN_HEIGHT));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		initContent();
+		
+		pack();
+        setResizable(false);
+        setVisible(true);	
+		setLocationRelativeTo(null); 
+	}
+	
+	private void initContent() {
+		initButtons();
+		
+		JLabel background=new JLabel(new ImageIcon("pictures\\Logo.png"));
+		add(background);
+		background.setLayout(null);
+		Insets insets = background.getInsets();
+		
+		JPanel jPanelButtons = new JPanel(new GridLayout(3,1,0,20)) ;
+		
+		jPanelButtons.setBackground(new Color(0,0,0,0));
+		jPanelButtons.add(jButtonLancerPartie);
+		jPanelButtons.add(jButtonAPropos);
+		jPanelButtons.add(jButtonQuitter);
+		
+		JPanel jPanelBody = new JPanel(new GridBagLayout());
+		jPanelBody.setBackground(new Color(0,0,0,0));
+	    GridBagConstraints gbc = new GridBagConstraints();
+	    jPanelBody.add(jPanelButtons, gbc);
+	    
+	    jPanelBody.setBounds(290 + insets.left, 130 + insets.top, 300, 300);
+	    background.add(jPanelBody) ;	
+	    
+		
+	}
+
+
+	private void initButtons() {
+		jButtonLancerPartie = new CommandButton("Lancer une nouvelle partie");
+		jButtonAPropos = new CommandButton("À propos...");
+		jButtonQuitter = new CommandButton("Quitter l'application");
+		
+		Command lancer = new ButtonLancer();
+		Command apropos = new ButtonAPropos();
+		Command quitter = new ButtonQuitter();
+
+		jButtonLancerPartie.storeCommand(lancer);
+		jButtonAPropos.storeCommand(apropos);
+		jButtonQuitter.storeCommand(quitter);
+		
+	}
+
+}

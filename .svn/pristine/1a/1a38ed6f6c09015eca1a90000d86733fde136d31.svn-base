@@ -1,0 +1,7 @@
+package commandMenu;
+
+public interface Invoker {
+	
+	public void storeCommand(Command c);
+
+}

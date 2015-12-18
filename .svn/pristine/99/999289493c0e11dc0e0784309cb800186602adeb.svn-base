@@ -1,0 +1,98 @@
+package model;
+
+import controller.BallController;
+import controller.BarController;
+import controller.BrickController;
+
+/**
+ * This class is the main model of the entire game.
+ * GameController.java control this instance and the entire game.
+ * 
+ * @author Antoine Fonfria, Baptiste Jaeckert
+ *
+ */
+
+public class Game {
+	
+	// Models and Controllers
+	private Bar bar;
+	private Ball ball;
+	private BarController barController;
+	private BallController ballController;
+	private BrickController brickController;
+	
+	// Game properties
+	private int life;
+	private static int maxLife;
+	
+	
+	
+
+	
+
+	public Game(int initLife){
+		
+		maxLife = initLife;
+		life = initLife;
+		
+	}
+	
+	public int getMaxLife() {
+		return maxLife;
+	}
+
+	public void setBar(Bar bar){
+		this.bar = bar;
+	}
+	
+	public void setBall(Ball ball){
+		this.ball = ball;
+	}
+	
+	
+	
+	public void setBarController(BarController barController){
+		this.barController = barController;
+	}
+	
+	public void setBallController(BallController ballController){
+		this.ballController = ballController;
+	}
+	
+	public void setBrickController(BrickController brickController){
+		this.brickController = brickController;
+	}
+	
+	public void setLife(int newLife){
+		
+		if(newLife >= -1)this.life = newLife;
+	}
+	
+	
+
+	public int getLife() {
+		return life;
+	}
+
+	public Bar getBar(){
+		return this.bar;
+	}
+	
+	public Ball getBall(){
+		return this.ball;
+	}
+	
+	
+	
+	public BarController getBarController(){
+		return this.barController;
+	}
+	
+	public BallController getBallController(){
+		return this.ballController;
+	}
+	
+	public BrickController getBrickController(){
+		return this.brickController;
+	}
+}

@@ -1,0 +1,14 @@
+package executer;
+
+import view.Menu;
+
+public class Executer {
+	public static int WIN_WIDTH = 800;
+	public static int WIN_HEIGHT = 600;
+
+	public static void main(String[] args) {
+		Menu.getInstance();
+
+	}
+
+}
