@@ -1,13 +1,13 @@
 package model;
 
-import java.io.File;
+/*import java.io.File;
 import java.io.IOException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.UnsupportedAudioFileException;*/
 
 import controller.BallController;
 import controller.BarController;
@@ -22,10 +22,10 @@ import controller.BrickController;
  * @author Jonathan Diaz-Muy 13 041 479
  * @author Adrien Burel 14 126 607
  * @author Landry Modeste Goutondji  14 000 626
- * @author Jérémy Collard 14 129 766
+ * @author Jï¿½rï¿½my Collard 14 129 766
  * @author Mentor Bajraktari 14 129 757
  * @author Olivier Scheffler 12 179 288
- * @author Elliot Gémus-Prévost 13 111 198
+ * @author Elliot Gï¿½mus-Prï¿½vost 13 111 198
  * @author Samuel Arseneault 13 161 801
  * @author Djenebou Monique Dembele 10 103 210
  * @author Florent Gargot 14 129 784
@@ -120,8 +120,10 @@ public class Game {
 	 * @param soundName
 	 */
 	public static void playSound(String soundName){
-	    try {
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds//"+soundName).getAbsoluteFile());
+	    // URL soundUrl = Game.class.getResource("/sounds/"+soundName);
+		System.out.println("Sound (not) played...");
+		/*try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("/sounds/"+soundName).getAbsoluteFile());
 			Clip clip;
 			try {
 				clip = AudioSystem.getClip();
@@ -137,6 +139,6 @@ public class Game {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
