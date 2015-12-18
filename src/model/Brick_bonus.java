@@ -30,10 +30,10 @@ public class Brick_bonus extends Brick {
 		this.type = type;
 	}
 
-
-	/*public Color getColor(){
-		return new Color(0, 0, 0);
-	}*/
+	@Override
+	public void setColor(){
+		setColor(new Color(255, 255, 255));
+	}
 	
 	@Override
 	public void kill() {

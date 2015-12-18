@@ -65,12 +65,13 @@ public class BrickController implements Observer{
 		this.removeAllBricks();
 		for(int i = 1 ; i < grid.getNbCasesX() - 1 ; i++)
 			for(int j = 1 ; j < grid.getNbCasesY() - 3; j++){
-				bType = (int) Math.floor(Math.random() * 2);
-				switch(bType){
-				case 0:
-					listOfBricks_alive.add(new Brick(i, j, 10));
-				case 1:
+				bType = (int) Math.floor(Math.random() * 10);
+				if(bType == 0){
 					listOfBricks_alive.add(new Brick_bonus(i, j, 10));
+				} else if(bType <= 4){
+					listOfBricks_alive.add(new Brick_strong(i, j, 10, 5));
+				} else{
+					listOfBricks_alive.add(new Brick(i, j, 10));
 				}
 			}
 	}
