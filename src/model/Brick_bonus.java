@@ -31,9 +31,9 @@ public class Brick_bonus extends Brick {
 	}
 
 
-	public Color getColor(){
+	/*public Color getColor(){
 		return new Color(0, 0, 0);
-	}
+	}*/
 	
 	@Override
 	public void kill() {
