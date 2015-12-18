@@ -6,6 +6,7 @@ import java.util.Observer;
 import java.util.Random;
 
 import model.Brick;
+import model.Brick_bonus;
 import model.Game;
 import model.Grid;
 import view.MainFrame;
@@ -18,10 +19,10 @@ import view.MainFrame;
  * @author Jonathan Diaz-Muy 13 041 479
  * @author Adrien Burel 14 126 607
  * @author Landry Modeste Goutondji  14 000 626
- * @author Jérémy Collard 14 129 766
+ * @author Jï¿½rï¿½my Collard 14 129 766
  * @author Mentor Bajraktari 14 129 757
  * @author Olivier Scheffler 12 179 288
- * @author Elliot Gémus-Prévost 13 111 198
+ * @author Elliot Gï¿½mus-Prï¿½vost 13 111 198
  * @author Samuel Arseneault 13 161 801
  * @author Djenebou Monique Dembele 10 103 210
  * @author Florent Gargot 14 129 784
@@ -59,10 +60,18 @@ public class BrickController implements Observer{
 	 *  Initially, the score given by a brick is 10.
 	 */
 	public void setBricksSquare(){
+		int bType;
 		this.removeAllBricks();
 		for(int i = 1 ; i < grid.getNbCasesX() - 1 ; i++)
-			for(int j = 1 ; j < grid.getNbCasesY() - 3; j++)
-				listOfBricks_alive.add(new Brick(i, j, 10)) ;					
+			for(int j = 1 ; j < grid.getNbCasesY() - 3; j++){
+				bType = (int) Math.floor(Math.random() * 2);
+				switch(bType){
+				case 0:
+					listOfBricks_alive.add(new Brick(i, j, 10));
+				case 1:
+					listOfBricks_alive.add(new Brick_bonus(i, j, 10)) ;
+				}
+			}
 	}
 	
 	public void removeDeadBricks(){
