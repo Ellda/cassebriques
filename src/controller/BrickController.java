@@ -60,6 +60,7 @@ public class BrickController implements Observer{
 	 *  Initially, the score given by a brick is 10.
 	 */
 	public void setBricksSquare(){
+		System.out.println("TEST");
 		int bType;
 		this.removeAllBricks();
 		for(int i = 1 ; i < grid.getNbCasesX() - 1 ; i++)
@@ -69,7 +70,7 @@ public class BrickController implements Observer{
 				case 0:
 					listOfBricks_alive.add(new Brick(i, j, 10));
 				case 1:
-					listOfBricks_alive.add(new Brick_bonus(i, j, 10)) ;
+					listOfBricks_alive.add(new Brick_bonus(i, j, 10));
 				}
 			}
 	}

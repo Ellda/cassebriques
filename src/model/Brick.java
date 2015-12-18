@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+
 /**
  * Defines the Brick objet.
  * 
@@ -23,6 +25,11 @@ public class Brick {
 	private boolean alive;
 	private int brickPointValue;
 
+	
+	// Couleurs
+	private final Color[] colorList = {new Color(245,129,71), new Color(29,124,188), new Color(90,213,193),
+			new Color(152,213, 90), new Color(243, 243, 85), new Color(245, 187, 71), new Color(29,124,188) };
+
 	public Brick() {
 		this.x = 4; // Initial position in the middle
 		this.y = 4;
@@ -34,6 +41,11 @@ public class Brick {
 		this.y = y;
 		this.brickPointValue = newPointValue;
 		this.alive = true;
+	}
+	
+
+	public Color getColor(){
+		return colorList[(getY()) % 6];
 	}
 
 	/**

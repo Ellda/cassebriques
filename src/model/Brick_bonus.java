@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+
 /**
  * The extended model of a brick that is also a bonus.
  * 
@@ -28,6 +30,11 @@ public class Brick_bonus extends Brick {
 		this.type = type;
 	}
 
+
+	public Color getColor(){
+		return new Color(0, 0, 0);
+	}
+	
 	@Override
 	public void kill() {
 		// TODO Auto-generated method stub

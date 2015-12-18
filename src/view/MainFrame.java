@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.BrickController;
 import executer.Executer;
 import model.Ball;
 import model.Bar;
@@ -41,8 +42,6 @@ public class MainFrame extends JPanel{
 	private Ball ball;
 	private ArrayList<Brick> listOfBricks;
 	private Grid grid;
-	private final Color[] colorList = {new Color(245,129,71), new Color(29,124,188), new Color(90,213,193),
-			new Color(152,213, 90), new Color(243, 243, 85), new Color(245, 187, 71), new Color(29,124,188) };
 	
 	private JLabel gameInfoLabel;
 
@@ -165,7 +164,7 @@ public class MainFrame extends JPanel{
 				System.err.println(e.getMessage());
 			}
 
-			gs.setColor(colorList[(theBrick.getY()) % 6]);
+			gs.setColor(theBrick.getColor());
 			try {
 				gs.fillRect(grid.getXLeftFromBrick(theBrick) + 2,
 						grid.getYTopFromBrick(theBrick) + 2, grid.getBrickWidth() - 4,
