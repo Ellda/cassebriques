@@ -1,8 +1,6 @@
-package controller;
+package model;
 
 import java.awt.Color;
-
-import model.Brick;
 
 public class Brick_strong extends Brick {
 
