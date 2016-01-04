@@ -14,6 +14,7 @@ import java.util.TimerTask;
 import view.MainFrame;
 import model.Ball;
 import model.Bar;
+import model.Configuration;
 import model.Game;
 
 /**
@@ -27,10 +28,10 @@ import model.Game;
  * @author Jonathan Diaz-Muy 13 041 479
  * @author Adrien Burel 14 126 607
  * @author Landry Modeste Goutondji  14 000 626
- * @author Jérémy Collard 14 129 766
+ * @author Jï¿½rï¿½my Collard 14 129 766
  * @author Mentor Bajraktari 14 129 757
  * @author Olivier Scheffler 12 179 288
- * @author Elliot Gémus-Prévost 13 111 198
+ * @author Elliot Gï¿½mus-Prï¿½vost 13 111 198
  * @author Samuel Arseneault 13 161 801
  * @author Djenebou Monique Dembele 10 103 210
  * @author Florent Gargot 14 129 784
@@ -48,7 +49,7 @@ public class GameController {
 	private GameState newLifeGameState;
 	// Current state of the game
 	private GameState currentState;
-
+	private Configuration gameConfig;
 	// Timer
 	private Timer gameTimer;
 	
@@ -63,7 +64,7 @@ public class GameController {
 		playingGameState = new PlayingGameState(this);
 		overGameState = new OverGameState(this);
 		newLifeGameState = new NewLifeGameState(this);
-
+		gameConfig = new Configuration();
 		// Adding of a key listener on the main frame
 		MyKeyListener listener = new MyKeyListener();
 		this.view.addKeyListener(listener);
@@ -164,44 +165,28 @@ public class GameController {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			switch (e.getKeyCode()) {
-
-			case KeyEvent.VK_ESCAPE:
+			  
+			int keyPressed = e.getKeyCode();
+			
+			if(keyPressed ==  gameConfig.getQuitter())
 				System.exit(0);
-				break;
-
-			case KeyEvent.VK_LEFT: // Left arrow
+			else if(keyPressed ==  gameConfig.getGauche())
 				game.getBarController().setLeftKeyPressed(true);
-				break;
-
-			case KeyEvent.VK_RIGHT: // Right arrow
+			else if(keyPressed ==  gameConfig.getDroite())
 				game.getBarController().setRightKeyPressed(true);
-				break;
 
-			default:
-				break;
-			}
 		}
-
+	
 		@Override
 		public void keyReleased(KeyEvent e) {
-			switch (e.getKeyCode()) {
+			int keyReleased = e.getKeyCode();
 
-			case KeyEvent.VK_ESCAPE:
+			if(keyReleased ==  gameConfig.getQuitter())
 				System.exit(0);
-				break;
-
-			case KeyEvent.VK_LEFT: // Left arrow
+			else if(keyReleased ==  gameConfig.getGauche())
 				game.getBarController().setLeftKeyPressed(false);
-				break;
-
-			case KeyEvent.VK_RIGHT: // Right arrow
+			else if(keyReleased ==  gameConfig.getDroite())
 				game.getBarController().setRightKeyPressed(false);
-				break;
-
-			default:
-				break;
-			}
 		}
 	}
 	

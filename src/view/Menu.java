@@ -36,9 +36,10 @@ import executer.Executer;
 public class Menu extends JFrame{
 	private static Menu instance = null ;
 	private CommandButton jButtonLancerPartie ;
+	private CommandButton jButtonConfiguration ;
 	private CommandButton jButtonAPropos ;
 	private CommandButton jButtonQuitter ;
-	
+
 	public synchronized static Menu getInstance(){
 		if(instance == null)
 			instance =  new Menu() ;
@@ -68,10 +69,11 @@ public class Menu extends JFrame{
 		background.setLayout(null);
 		Insets insets = background.getInsets();
 		
-		JPanel jPanelButtons = new JPanel(new GridLayout(3,1,0,20)) ;
+		JPanel jPanelButtons = new JPanel(new GridLayout(4,1,0,20)) ;
 		
 		jPanelButtons.setBackground(new Color(0,0,0,0));
 		jPanelButtons.add(jButtonLancerPartie);
+		jPanelButtons.add(jButtonConfiguration);
 		jPanelButtons.add(jButtonAPropos);
 		jPanelButtons.add(jButtonQuitter);
 		
@@ -89,6 +91,7 @@ public class Menu extends JFrame{
 
 	private void initButtons() {
 		jButtonLancerPartie = new CommandButton("Lancer une nouvelle partie");
+		jButtonConfiguration = new CommandButton("Configuration");
 		jButtonAPropos = new CommandButton("A propos...");
 		jButtonQuitter = new CommandButton("Quitter l'application");
 		
