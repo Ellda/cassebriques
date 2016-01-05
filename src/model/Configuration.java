@@ -46,7 +46,7 @@ public class Configuration {
 		this.gauche = KeyEvent.VK_LEFT;
 		this.quitter = KeyEvent.VK_ESCAPE;
 		this.son = true;
-		this.configurationFile = "testConfiguration";
+		this.configurationFile = "configuration/default.csv";
 	}
 	
 

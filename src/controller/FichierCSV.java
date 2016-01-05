@@ -3,6 +3,9 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,13 +30,14 @@ public class FichierCSV {
 	
 	
 	public void writeAndReplace(List<String> lines) throws IOException{
-		Path file = Paths.get(this.nomFichier);
-		System.out.println(file.toString());
+		ClassLoader classLoader = getClass().getClassLoader();
+		Path file = Paths.get(URLDecoder.decode(classLoader.getResource(this.nomFichier).getFile(), "UTF-8" ));
 		Files.write(file, lines, Charset.forName("UTF-8"));
 	}
 	
 	public List<String> readAll() throws IOException {
-		Path file = Paths.get(this.nomFichier);
+		ClassLoader classLoader = getClass().getClassLoader();
+		Path file = Paths.get(URLDecoder.decode(classLoader.getResource(this.nomFichier).getFile(), "UTF-8" ));
 		List<String> lines = Files.readAllLines(file, Charset.forName("UTF-8"));
 		return lines;
 	}

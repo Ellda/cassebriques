@@ -64,7 +64,7 @@ public class GameController {
 		playingGameState = new PlayingGameState(this);
 		overGameState = new OverGameState(this);
 		newLifeGameState = new NewLifeGameState(this);
-		gameConfig = new Configuration("testConfiguration");
+		gameConfig = new Configuration("configuration/default.csv");
 		// Adding of a key listener on the main frame
 		MyKeyListener listener = new MyKeyListener();
 		this.view.addKeyListener(listener);
