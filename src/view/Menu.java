@@ -98,10 +98,12 @@ public class Menu extends JFrame{
 		Command lancer = new ButtonLancer();
 		Command apropos = new ButtonAPropos();
 		Command quitter = new ButtonQuitter();
-
+		Command configuration = new ButtonConfiguration();
+		
 		jButtonLancerPartie.storeCommand(lancer);
 		jButtonAPropos.storeCommand(apropos);
 		jButtonQuitter.storeCommand(quitter);
+		jButtonConfiguration.storeCommand(configuration);
 		
 	}
 
