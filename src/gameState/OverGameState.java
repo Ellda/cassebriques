@@ -8,6 +8,7 @@ import controller.GameController;
 import model.Game;
 
 import java.io.*;
+import java.net.URLDecoder;
 import java.util.*;
 
 /**
@@ -117,7 +118,7 @@ public class OverGameState implements GameState {
 		try {
 			//Get file from resources folder
 			ClassLoader classLoader = getClass().getClassLoader();
-			File file = new File(classLoader.getResource(resource).getFile());
+			File file = new File(URLDecoder.decode(classLoader.getResource(resource).getFile(), "UTF-8" ));
 			
 			String sCurrentLine;
 			br = new BufferedReader(new FileReader(file));
@@ -173,7 +174,7 @@ public class OverGameState implements GameState {
 		try {
 			//Get file from resources folder
 			ClassLoader classLoader = getClass().getClassLoader();
-			File file = new File(classLoader.getResource(resource).getFile());
+			File file = new File(URLDecoder.decode(classLoader.getResource(resource).getFile(),"UTF-8"));
 
 			wr = new BufferedWriter(new FileWriter(file));
 				
