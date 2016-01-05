@@ -1,5 +1,15 @@
 package model;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 /*import java.io.File;
 import java.io.IOException;
 
@@ -120,10 +130,9 @@ public class Game {
 	 * @param soundName
 	 */
 	public static void playSound(String soundName){
-	    // URL soundUrl = Game.class.getResource("/sounds/"+soundName);
 		System.out.println("Sound (not) played...");
-		/*try {
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("/sounds/"+soundName).getAbsoluteFile());
+		try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/"+soundName).getAbsoluteFile());
 			Clip clip;
 			try {
 				clip = AudioSystem.getClip();
@@ -139,6 +148,6 @@ public class Game {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 }
