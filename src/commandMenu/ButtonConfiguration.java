@@ -10,11 +10,12 @@ import javax.swing.JLabel;
 import controller.GameController;
 import executer.Executer;
 import model.Game;
+import view.ConfigurationFrame;
 import view.MainFrame;
 import view.Menu;
 
-public class CommandConfiguration extends Command {
-	private static MainFrame mainFrameView;
+public class ButtonConfiguration extends Command {
+	private static ConfigurationFrame configurationFrameView;
 	private static JFrame frame;
 	private static Game game;
 	private static GameController gameController;
@@ -28,6 +29,8 @@ public class CommandConfiguration extends Command {
 	}
 
 	private void initFrame() {
+		configurationFrameView = new ConfigurationFrame();
+
 		frame = new JFrame("Casse-briques Configuration");
 		frame.setLayout(new BorderLayout());
 		frame.setLayout(new FlowLayout());
@@ -35,7 +38,7 @@ public class CommandConfiguration extends Command {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		frame.add(mainFrameView);
+		frame.add(configurationFrameView);
 		frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null); 
