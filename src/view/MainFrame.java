@@ -166,12 +166,15 @@ public class MainFrame extends JPanel{
 
 			gs.setColor(theBrick.getColor());
 			try {
+				if(gs==null)
+					System.out.println("GS null !!!");
 				gs.fillRect(grid.getXLeftFromBrick(theBrick) + 2,
 						grid.getYTopFromBrick(theBrick) + 2, grid.getBrickWidth() - 4,
 						grid.getBrickHeight() - 4);
 
 			} catch (Exception e) {
 				System.err.println("paintBricks " + e.getMessage());
+				e.printStackTrace();
 			}
 
 		}

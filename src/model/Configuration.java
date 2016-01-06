@@ -13,7 +13,7 @@ public class Configuration {
 	private boolean son;
 	
 	public Configuration() {
-		defaultConfig();
+		this("configuration/default.csv");
 	}
 	
 	
@@ -88,5 +88,11 @@ public class Configuration {
 	public void save() throws IOException{
 		FichierCSV monFichier = new FichierCSV(this.configurationFile);
 		monFichier.writeAndReplace(this.exportLines());
+	}
+
+
+
+	public void toggleSon() {
+		this.son = !this.son;
 	}
 }

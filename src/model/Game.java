@@ -130,24 +130,26 @@ public class Game {
 	 * @param soundName
 	 */
 	public static void playSound(String soundName){
-		System.out.println("Sound (not) played...");
-		try {
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/"+soundName).getAbsoluteFile());
-			Clip clip;
+		Configuration cfg = new Configuration();
+		if(cfg.isSon()){
 			try {
-				clip = AudioSystem.getClip();
-				clip.open(audioInputStream);
-				clip.start();
-			} catch (LineUnavailableException e) {
+				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("sounds/"+soundName).getAbsoluteFile());
+				Clip clip;
+				try {
+					clip = AudioSystem.getClip();
+					clip.open(audioInputStream);
+					clip.start();
+				} catch (LineUnavailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (UnsupportedAudioFileException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 }

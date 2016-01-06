@@ -8,6 +8,7 @@ import gameState.PlayingGameState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -174,7 +175,15 @@ public class GameController {
 				game.getBarController().setLeftKeyPressed(true);
 			else if(keyPressed ==  gameConfig.getDroite())
 				game.getBarController().setRightKeyPressed(true);
-
+			else if(keyPressed == 77){ //m
+				gameConfig.toggleSon();
+				try {
+					gameConfig.save();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		}
 	
 		@Override

@@ -66,6 +66,7 @@ public class ConfigurationFrame extends JPanel{
 		panel.add(lblSon);
 		
 		JCheckBox checkBox = new JCheckBox("");
+		checkBox.setSelected(config.isSon());
 		panel.add(checkBox);
 		
 		JLabel lblConfiguration = new JLabel("Configuration");
