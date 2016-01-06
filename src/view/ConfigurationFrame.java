@@ -39,7 +39,7 @@ public class ConfigurationFrame extends JPanel{
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel.setLayout(new GridLayout(0, 2, 2, 5));
 		
 		JLabel lblGauche = new JLabel("Gauche");
 		panel.add(lblGauche);
@@ -81,11 +81,19 @@ public class ConfigurationFrame extends JPanel{
 		JButton btnRetour = new JButton("Retour");
 		panel_1.add(btnRetour);
 		
+		
+		
 		btnRetour.addActionListener( new ActionListener()
 		{
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	Menu.getInstance().setVisible(true);		    }
+
+		    	Menu.getInstance().setVisible(true);
+		    	JButton button = (JButton)e.getSource();
+		    	JPanel grandparent = (JPanel)button.getParent().getParent();
+		    	JFrame parentFrame = (JFrame) grandparent.getRootPane().getParent();
+		    	parentFrame.dispose();
+		    }
 		});
 
 		btnValider.addActionListener( new ActionListener()
@@ -95,12 +103,19 @@ public class ConfigurationFrame extends JPanel{
 		    	//TODO sauvegarde configuration
 		    	try {
 					config.save();
+			    	Menu.getInstance().setVisible(true); // on quitte la fenetre de configuration
+			    	JButton button = (JButton)e.getSource();
+			    	JPanel grandparent = (JPanel)button.getParent().getParent();
+			    	JFrame parentFrame = (JFrame) grandparent.getRootPane().getParent();
+			    	parentFrame.dispose();
+			    	
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, "Impossible d'enregistrer la configuration, le système est peut-etre occupé. Veuillez reessayez plus tards.");
 
 					e1.printStackTrace();
 				}
+
 		    }
 		});
 		

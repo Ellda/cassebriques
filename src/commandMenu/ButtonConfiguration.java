@@ -1,6 +1,7 @@
 package commandMenu;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
@@ -34,13 +35,10 @@ public class ButtonConfiguration extends Command {
 		frame = new JFrame("Casse-briques Configuration");
 		frame.setLayout(new BorderLayout());
 		frame.setLayout(new FlowLayout());
-		frame.setSize(Executer.WIN_WIDTH, Executer.WIN_HEIGHT);
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		frame.add(configurationFrameView);
 		frame.pack();
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setLocationRelativeTo(null); 
 		frame.setVisible(true);
 		

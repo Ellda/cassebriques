@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import model.Configuration;
@@ -43,6 +45,9 @@ public class ToucheButton  implements KeyListener, ActionListener{
 		  case 1:  this.cfg.setDroite(e.getKeyCode());  break;
 		  case 2:  this.cfg.setQuitter(e.getKeyCode());  break;
 		}
+	    	JPanel grandparent = (JPanel)this.button.getParent().getParent();
+	    	JFrame parentFrame = (JFrame) grandparent.getRootPane().getParent();
+	    	parentFrame.pack();
 	}
 
 	@Override
