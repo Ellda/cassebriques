@@ -3,6 +3,7 @@ package gameState;
 import javax.swing.*;
 
 import view.Menu;
+import controller.FichierCSV;
 import controller.GameController;
 
 import model.Game;
@@ -106,9 +107,9 @@ public class OverGameState implements GameState {
 	 */
 	private JTable getScoresFromFile(String resource, int score) {
 		
-		//br et wr pour lire le fichier et ecrire
-		BufferedReader br = null;
-		BufferedWriter wr = null;
+		FichierCSV f = new FichierCSV(resource);
+
+	
 		
 		String pseudoDefaut = "PSEUDO";
 		
@@ -117,33 +118,25 @@ public class OverGameState implements GameState {
 
 		try {
 			//Get file from resources folder
-			ClassLoader classLoader = getClass().getClassLoader();
-			File file = new File(URLDecoder.decode(classLoader.getResource(resource).getFile(), "UTF-8" ));
-			
-			String sCurrentLine;
-			br = new BufferedReader(new FileReader(file));
+			List<String> listeScore = f.readAll();
 			
 			//Tant que la ligne lue n'est pas "null" on ajoute la ligne à la liste des scores. La ligne est de la forme : "pseudo;score"
-			while((sCurrentLine=br.readLine()) != null){
-				String[] record= sCurrentLine.split(";");
+
+			for (String item : listeScore) {
+				String[] record= item.split(";");
 				if(record[0].contains("*")){
 					record[0] = record[0].replace("*", "");
 					pseudoDefaut = record[0];
 				}
 				scores.add(record);
-			}
 
+			}
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		finally {
-			try {
-				if (br != null)br.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
+		
 		// On affiche une fenêtre pour demander le pseudo du joueur
 		String s = (String)JOptionPane.showInputDialog(
 				gameController.getView(),
@@ -173,26 +166,19 @@ public class OverGameState implements GameState {
 		
 		try {
 			//Get file from resources folder
+			
 			ClassLoader classLoader = getClass().getClassLoader();
 			File file = new File(URLDecoder.decode(classLoader.getResource(resource).getFile(),"UTF-8"));
-
-			wr = new BufferedWriter(new FileWriter(file));
-				
+			
+			List<String> listeScoreWrite = new ArrayList<String>();
 			//On ecrit chaque ligne une par une dans l'ordre
 			for( String[] line : scores){
-				wr.append(line[0] + ";" + line[1]);
-				wr.newLine();
+				listeScoreWrite.add(line[0] + ";" + line[1]);
 			}
+			f.writeAndReplace(listeScoreWrite);
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		finally {
-			try {
-				if (wr != null)wr.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
 		}
 		
 		//On remplit la table des scores pour la renvoyer
