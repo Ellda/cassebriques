@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import model.Brick;
+import model.Game;
 import model.Grid;
 
 import org.junit.After;
@@ -33,6 +34,7 @@ import controller.BrickController;
 
 public class BrickControllerTest {
 	private BrickController brickController ;
+	private Game game;
 	private MainFrame mainFrame ;
 	private ArrayList<Brick> listOfBrick;
 	
@@ -41,9 +43,10 @@ public class BrickControllerTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		game = new Game(10);
 		mainFrame = new MainFrame() ;
 		grid = Grid.getInstance() ;
-		brickController = new BrickController(mainFrame);
+		brickController = new BrickController(game, mainFrame);
 	}
 
 	@After

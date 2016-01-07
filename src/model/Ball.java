@@ -29,6 +29,7 @@ public class Ball extends Observable{
 	private double angle; // angle max 90 et angle min 30°
 	private int xDir; //SensX
 	private int yDir; //SensY
+	private double coef = 1;
 	private boolean alive;
 
 	public Ball() {
@@ -51,6 +52,7 @@ public class Ball extends Observable{
 		this.xDir = 1;
 		this.yDir = -1;
 		this.alive = true;
+		this.coef = 1;
 	}
 
 	/**
@@ -107,6 +109,10 @@ public class Ball extends Observable{
 	public void setSpeed(double d) {
 		speed = d;
 	}
+	public void setCoef(double d) {
+		System.out.println(d);
+		coef = d;
+	}
 	
 	public void killBall(){
 		this.alive = false;
@@ -143,6 +149,9 @@ public class Ball extends Observable{
 	public double getSpeed() {
 		return speed;
 	}
+	public double getCoef() {
+		return coef;
+	}
 
 	public double getyBottom(){
 		return y + radius;
@@ -172,11 +181,11 @@ public class Ball extends Observable{
 	}
 	
 	public double calcFutureX(){
-		return getX() + Math.abs(Math.cos(getAngle()))*getxDir()*getSpeed();
+		return getX() + Math.abs(Math.cos(getAngle()))*getxDir()*getSpeed() * coef;
 	}
 	
 	public double calcFutureY(){
-		return getY() + Math.abs(Math.sin(getAngle()))*getyDir()*getSpeed();
+		return getY() + Math.abs(Math.sin(getAngle()))*getyDir()*getSpeed() * coef;
 	}
 
 	public void changeAngleFromPercentage(double percentage) {

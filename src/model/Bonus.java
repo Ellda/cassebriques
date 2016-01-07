@@ -1,9 +1,13 @@
 package model;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Bonus {
 	
 	protected Game game;
 	protected int delay;
+	private Timer timer;
 
 	public Bonus(Game game) {
 		super();
@@ -13,8 +17,9 @@ public class Bonus {
 	
 	public void launchBonus()
 	{
-		new java.util.Timer().schedule( 
-		        new java.util.TimerTask() {
+		timer = new Timer();
+		timer.schedule( 
+		        new TimerTask() {
 		            @Override
 		            public void run() {
 		                stopBonus();
@@ -22,6 +27,16 @@ public class Bonus {
 		        }, 
 		        delay 
 		);
+	}
+	
+	public void cancelBonus()
+	{
+		if(timer != null)
+		{
+			timer.cancel();
+			timer.purge();
+			timer = null;
+		}
 	}
 	
 	protected void stopBonus()

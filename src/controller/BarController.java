@@ -26,11 +26,11 @@ public class BarController {
 	private Bar bar;
 	private boolean leftKeyPressed = false;
 	private boolean rightKeyPressed = false;
-	private MainFrame mainFrame;
+	//private MainFrame mainFrame;
 
 	public BarController(Bar barModel, MainFrame mainFrame) {
 		bar = barModel;
-		this.mainFrame = mainFrame;
+		//this.mainFrame = mainFrame;
 	}
 
 	/**
@@ -56,8 +56,8 @@ public class BarController {
 			}
 		}
 		// Repaint the main frame
-		mainFrame.paintBar(bar);
-		mainFrame.repaint();
+		//mainFrame.paintBar(bar);
+		//mainFrame.repaint();
 	}
 	
 	public void setLeftKeyPressed(boolean pressed){

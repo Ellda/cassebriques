@@ -2,7 +2,6 @@ package controller;
 
 import executer.Executer;
 import model.Ball;
-import model.Bar;
 import model.Brick;
 import model.Game;
 import view.MainFrame;
@@ -35,7 +34,6 @@ public class BallController {
 
 	public BallController(Ball ballModel, MainFrame mainFrame) {
 		ball = ballModel;
-		new Bar();
 		this.mainFrame = mainFrame;
 		collision = new Collision(mainFrame);
 
@@ -45,8 +43,8 @@ public class BallController {
 		moveX();
 		moveY();
 		ball.setSpeed(ball.getSpeed() + 0.002);
-		mainFrame.paintBall(ball);
-		mainFrame.repaint();
+		//mainFrame.paintBall(ball);
+		//mainFrame.repaint();
 	}
 
 	/**

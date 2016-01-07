@@ -5,15 +5,16 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controller.BrickController;
 import executer.Executer;
 import model.Ball;
 import model.Bar;
+import model.BonusObject;
 import model.Brick;
 import model.Grid;
 
@@ -41,6 +42,7 @@ public class MainFrame extends JPanel{
 	private Bar bar;
 	private Ball ball;
 	private ArrayList<Brick> listOfBricks;
+	private List<BonusObject> boList;
 	private Grid grid;
 	
 	private JLabel gameInfoLabel;
@@ -51,6 +53,7 @@ public class MainFrame extends JPanel{
 		ball = new Ball();
 		grid = Grid.getInstance();
 		listOfBricks = new ArrayList<Brick>();
+		boList = new ArrayList<BonusObject>();
 		gameInfoLabel = new JLabel();
 		this.add(gameInfoLabel);
 
@@ -68,6 +71,7 @@ public class MainFrame extends JPanel{
 		paintBar(bar);
 		paintBall(ball);
 		paintBricks(listOfBricks);
+		paintBonusObjects(boList);
 		Toolkit.getDefaultToolkit().sync();
 	}
 	
@@ -75,6 +79,7 @@ public class MainFrame extends JPanel{
 		paintBar(bar);
 		paintBall(ball);
 		paintBricks(listOfBricks);
+		paintBonusObjects(boList);
 		Toolkit.getDefaultToolkit().sync();
 	}
 
@@ -181,6 +186,22 @@ public class MainFrame extends JPanel{
 
 		this.listOfBricks = listOfBrick;
 	}
+	
+	public void paintBonusObjects(List<BonusObject> boList) {
+		synchronized (boList)
+		{
+			this.boList = boList;
+			if (gs == null)
+				gs = this.getGraphics();
+			for (BonusObject bo : boList)
+			{
+				gs.setColor(Color.BLUE);
+				double size = bo.getSize();
+				gs.fillOval((int) Math.round(bo.getX() - size), (int) Math.round(bo.getY() - size),
+						(int) Math.round(2 * size), (int) Math.round(2 * size));
+			}
+		}
+	}
 
 
 	public void setGraph(Graphics g) {
@@ -201,5 +222,9 @@ public class MainFrame extends JPanel{
 
 	public void setBrickList(ArrayList<Brick> newListOfBricks) {
 		this.listOfBricks = newListOfBricks;
+	}
+
+	public void setBonusObjectsList(List<BonusObject> boList) {
+		this.boList = boList;
 	}
 }

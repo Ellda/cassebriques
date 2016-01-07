@@ -15,6 +15,7 @@ import java.util.TimerTask;
 import view.MainFrame;
 import model.Ball;
 import model.Bar;
+import model.Bonus;
 import model.Configuration;
 import model.Game;
 
@@ -75,7 +76,7 @@ public class GameController {
 
 		// Repaint before restarting the timer (to see the changes during the
 		// second of waiting before playing)
-		view.repaintAll();
+		//view.repaintAll();
 		view.repaint();
 
 		// Global timer, restarted each time that this method is called (new
@@ -102,7 +103,8 @@ public class GameController {
 		game.setBar(new Bar());
 		game.setBallController(new BallController(game.getBall(), getView()));
 		game.setBarController(new BarController(game.getBar(), getView()));
-		game.setBrickController(new BrickController(getView()));
+		game.setBrickController(new BrickController(getGame(), getView()));
+		game.setBonusObjectController(new BonusObjectController(getGame(), getView()));
 		game.getBrickController().setBricksSquare();
 		game.getBall().addObserver(game.getBrickController());
 		// Informs the view
@@ -121,14 +123,21 @@ public class GameController {
 	 * Reinitialize the game. Called when the player loses a life.
 	 */
 	public void newLifeGame() {
+		// Cancel bonus effects
+		for (Bonus b : game.getBonusList())
+		{
+			b.cancelBonus();
+		}
+		game.clearBonusList();
+		
 		// Resets the ball and the bar
-		
-		
 		game.setBall(new Ball());
 		game.setBar(new Bar());
 		game.getBallController().setBall(game.getBall());
 		game.getBarController().setBar(game.getBar());
 		game.getBall().addObserver(game.getBrickController());
+		// Clear falling bonus objects
+		game.getBonusObjectController().clearBonusObjects();
 		// Informs the view
 		view.setBall(game.getBall());
 		view.setBar(game.getBar());
@@ -243,6 +252,8 @@ public class GameController {
 		if(game.getLife() > -1)game.setLife(game.getLife() - 1);
 	}
 	
-	
-
+	public void repaint()
+	{
+		view.repaint();
+	}
 }

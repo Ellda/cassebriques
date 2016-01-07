@@ -10,15 +10,19 @@ import java.awt.Color;
 
 public class Brick_bonus extends Brick {
 
+	private Game game;
 	private int type;
 	
-	public Brick_bonus(int x, int y, int newPointValue) {
+	public Brick_bonus(int x, int y, int newPointValue, Game game) {
 		super(x, y, newPointValue);
+		this.game = game;
 		generateRandomType();
+		setColor(Color.WHITE);
 	}
 
-	public Brick_bonus(int x, int y, int newPointValue, int type) {
+	public Brick_bonus(int x, int y, int newPointValue, Game game, int type) {
 		super(x, y, newPointValue);
+		this.game = game;
 		setType(type);
 	}
 
@@ -37,14 +41,17 @@ public class Brick_bonus extends Brick {
 	
 	@Override
 	public void kill() {
-		// TODO Auto-generated method stub
 		// TODO Call a specific method
+		Grid g = Grid.getInstance();
+		game.getBonusObjectController().createBonusObject(getType(),
+				g.getXLeftFromBrick(this) + g.getBrickWidth() / 2,
+				g.getYTopFromBrick(this) + g.getBrickHeight() / 2);
 		super.kill();
 	}
 
 
 	private void generateRandomType() {
-		int type = (int) Math.floor(Math.random() * 5);
+		int type = (int) Math.floor(Math.random() * 4);
 		setType(type);
 	}
 	

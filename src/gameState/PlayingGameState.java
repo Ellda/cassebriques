@@ -35,7 +35,9 @@ public class PlayingGameState implements GameState {
 		gameController.getGame().getBarController().refresh();
 		gameController.getGame().getBrickController().refresh();
 		gameController.getGame().getBallController().refresh();
-
+		gameController.getGame().getBonusObjectController().refresh();
+		gameController.repaint();
+		
 		gameController.updateInfosView();
 
 		if (gameController.getGame().getBall().getAlive() == false) {

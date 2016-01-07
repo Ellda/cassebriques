@@ -12,13 +12,13 @@ public class Bonus_ballSpeed extends Bonus{
 	@Override
 	public void launchBonus()
 	{
-		game.getBall().setSpeed(game.getBall().getSpeed() / coeff);
+		game.getBall().setCoef(game.getBall().getCoef() / coeff);
 		super.launchBonus();
 	}
 	
 	@Override
 	protected void stopBonus()
 	{
-		game.getBall().setSpeed(game.getBall().getSpeed() * coeff);
+		game.getBall().setCoef(game.getBall().getCoef() * coeff);
 	}
 }

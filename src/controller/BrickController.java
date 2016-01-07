@@ -6,9 +6,7 @@ import java.util.Observer;
 import java.util.Random;
 
 import model.BrickFactory;
-import model.Brick_bonus;
 import model.Brick;
-import model.Brick_strong;
 import model.Game;
 import model.Grid;
 import view.MainFrame;
@@ -32,6 +30,7 @@ import view.MainFrame;
 
 public class BrickController implements Observer{
 	
+	//private Game game;
 	private Grid grid ;
 	private MainFrame mainFrame ;
 	private ArrayList<Brick> listOfBricks_alive ;
@@ -48,13 +47,14 @@ public class BrickController implements Observer{
 	private int score;
 	
 	
-	public BrickController(MainFrame mainFrame){
+	public BrickController(Game game, MainFrame mainFrame){
 		
+		//this.game = game;
 		grid = Grid.getInstance() ;
 		listOfBricks_alive = new ArrayList<Brick>() ;
 		this.mainFrame = mainFrame;
 		score = 0;
-		BF = new BrickFactory();
+		BF = new BrickFactory(game);
 	}
 	
 	
@@ -66,7 +66,7 @@ public class BrickController implements Observer{
 	 */
 	public void setBricksSquare(){
 		System.out.println("TEST");
-		int bType;
+		//int bType;
 		this.removeAllBricks();
 		for(int i = 1 ; i < grid.getNbCasesX() - 1 ; i++)
 			for(int j = 1 ; j < grid.getNbCasesY() - 3; j++){
@@ -78,11 +78,13 @@ public class BrickController implements Observer{
 		for(int i = listOfBricks_alive.size() - 1; i >= 0; i--){
 			if(listOfBricks_alive.get(i).isDead()){
 				
+				// BonusObject bo = new BonusObject(type, x, y);
+				
 				coordMorteX.add(listOfBricks_alive.get(i).getX());
 				coordMorteY.add(listOfBricks_alive.get(i).getY());
 				
 				ballController = new BallController (null, mainFrame);
-								
+				
 				ballController.incNbBrickTouche();
 				incScore(listOfBricks_alive.get(i).getBrickPointValue() * ballController.getNbBrickTouche());
 				listOfBricks_alive.remove(i);
@@ -99,9 +101,10 @@ public class BrickController implements Observer{
 		if(coordMorteX.size() > 0 && coordMorteY.size() > 0){
 			Random randomGenerator = new Random();
 			int randomInt = randomGenerator.nextInt(coordMorteX.size());
-			listOfBricks_alive.add(new Brick(coordMorteX.get(randomInt).intValue(), 
+			/*listOfBricks_alive.add(new Brick(coordMorteX.get(randomInt).intValue(), 
 											 coordMorteY.get(randomInt).intValue(), 
-											 10)); //10 is the point value of the brick
+											 10)); //10 is the point value of the brick*/
+			listOfBricks_alive.add(BF.makeBrick(coordMorteX.get(randomInt), coordMorteY.get(randomInt)));
 			coordMorteX.remove(0);
 			coordMorteY.remove(0);
 			
@@ -129,8 +132,8 @@ public class BrickController implements Observer{
 			mainFrame.getBar().setCounter(0);
 		}
 		
-		mainFrame.paintBricks(listOfBricks_alive);
-		mainFrame.repaint();
+		//mainFrame.paintBricks(listOfBricks_alive);
+		//mainFrame.repaint();
 	
 	}
 	

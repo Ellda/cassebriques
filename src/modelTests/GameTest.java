@@ -51,8 +51,8 @@ public class GameTest {
 		jeu = new Game(2);
 		gm = new GameController(jeu, view);
 		barController =new BarController(bar, view);
-	 ballController = new BallController(ball, view);
-		brickController = new BrickController(view);
+		ballController = new BallController(ball, view);
+		brickController = new BrickController(jeu, view);
 	}
 
 	@After

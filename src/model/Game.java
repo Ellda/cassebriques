@@ -2,7 +2,8 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -10,17 +11,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-/*import java.io.File;
-import java.io.IOException;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;*/
-
 import controller.BallController;
 import controller.BarController;
+import controller.BonusObjectController;
 import controller.BrickController;
 
 /**
@@ -49,6 +42,8 @@ public class Game {
 	private BarController barController;
 	private BallController ballController;
 	private BrickController brickController;
+	private BonusObjectController bonusObjectController;
+	private List<Bonus> bonusList; // Every bonus collected during this life
 	
 	// Game properties
 	private int life;
@@ -63,6 +58,7 @@ public class Game {
 		
 		maxLife = initLife;
 		life = initLife;
+		bonusList = new ArrayList<Bonus>();
 		
 	}
 	
@@ -92,6 +88,20 @@ public class Game {
 		this.brickController = brickController;
 	}
 	
+	public void setBonusObjectController(BonusObjectController bonusObjectController)
+	{
+		this.bonusObjectController = bonusObjectController;
+	}
+	
+	public void registerBonus(Bonus b)
+	{
+		bonusList.add(b);
+	}
+	public void clearBonusList()
+	{
+		bonusList.clear();
+	}
+	
 	public void setLife(int newLife){
 		
 		if(newLife >= -1)this.life = newLife;
@@ -110,6 +120,10 @@ public class Game {
 	public Ball getBall(){
 		return this.ball;
 	}
+	public List<Bonus> getBonusList()
+	{
+		return bonusList;
+	}
 	
 	
 	
@@ -123,6 +137,10 @@ public class Game {
 	
 	public BrickController getBrickController(){
 		return this.brickController;
+	}
+	
+	public BonusObjectController getBonusObjectController(){
+		return this.bonusObjectController;
 	}
 	
 	/**
