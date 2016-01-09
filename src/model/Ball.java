@@ -110,7 +110,6 @@ public class Ball extends Observable{
 		speed = d;
 	}
 	public void setCoef(double d) {
-		System.out.println(d);
 		coef = d;
 	}
 	

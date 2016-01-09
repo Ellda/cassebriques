@@ -94,9 +94,15 @@ public class GameController {
 	 * after a Game Over state.
 	 */
 	public void initGame() {
+		// Reset previous game bonus if any
+		for (Bonus b : game.getBonusList())
+		{
+			b.cancelBonus();
+		}
+		game.clearBonusList();
+		
 		// Set the total life
 		game.setLife(game.getMaxLife());
-		
 
 		// Defines the elements
 		game.setBall(new Ball());

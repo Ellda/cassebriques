@@ -17,7 +17,6 @@ public class Brick_bonus extends Brick {
 		super(x, y, newPointValue);
 		this.game = game;
 		generateRandomType();
-		setColor(Color.WHITE);
 	}
 
 	public Brick_bonus(int x, int y, int newPointValue, Game game, int type) {
@@ -36,7 +35,8 @@ public class Brick_bonus extends Brick {
 
 	@Override
 	public void setColor(){
-		setColor(new Color(255, 255, 255));
+		//setColor(new Color(255, 255, 255));
+		setColor(new Color(1f,.5f,1f,.3f));
 	}
 	
 	@Override

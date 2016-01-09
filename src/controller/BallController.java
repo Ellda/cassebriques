@@ -4,6 +4,7 @@ import executer.Executer;
 import model.Ball;
 import model.Brick;
 import model.Game;
+import model.Grid;
 import view.MainFrame;
 
 /**
@@ -60,8 +61,10 @@ public class BallController {
 		if (newX - ball.getRadius() > 0
 				|| newX + ball.getRadius() < Executer.WIN_WIDTH) {
 			br = collision.collision_brickX(newX);
-			bounceAndKillBrick(br, true);
+			newX = bounceAndKillBrick(br, true, newX);
 		}
+		// Si on veut pouvoir casser plusieurs briques à la fois
+		// Faire retourner à collision_brickX une liste de briques et modifier bounceAndKillBrick en accordance
 		ball.setX(newX);
 	}
 
@@ -83,7 +86,7 @@ public class BallController {
 			// Top of the bar collision
 			if (ball.getyDir() == 1
 					&& collision.intersect_haut(mainFrame.getBar(), newY)) {
-
+				
 				Game.playSound("smb_kick.wav");
 
 				mainFrame.getBar().incCounter();
@@ -100,25 +103,37 @@ public class BallController {
 						.getDistanceFromCenter(ball.getX()));
 
 				// 3) Bouncing
-				newY = calcCoordAfterBounce(newY, ball.getY(), ball.getyDir(),
-						mainFrame.getBar().getTopY());
+
+				newY = mainFrame.getBar().getTopY() - ball.getRadius();
+				
+				//newY = calcCoordAfterBounce(newY, ball.getY(), ball.getyDir(),
+				//		mainFrame.getBar().getTopY());
 				ball.reverseyDir();
 				BallController ballController = new BallController(null, null);
 				ballController.setNbBrickTouche(0);
 
 			} else {
 				br = collision.collision_brickY(newY);
-				bounceAndKillBrick(br, false);
+				newY = bounceAndKillBrick(br, false, newY);
+				
 			}
 			ball.setY(newY);
 		}
 	}
 
-	private void bounceAndKillBrick(Brick br, boolean XTrueYFalse) {
+	private double bounceAndKillBrick(Brick br, boolean XTrueYFalse, double newCoord) {
+		double ret = newCoord;
+		Grid g = Grid.getInstance();
 		if (br != null) {
 			br.kill();
+			// Put the ball on the outside of the brick
+			if(findDirection(XTrueYFalse) == 1)
+				ret = (XTrueYFalse ? g.getXLeftFromBrick(br) : g.getYTopFromBrick(br)) - ball.getRadius();
+			else
+				ret = (XTrueYFalse ? g.getXRightFromBrick(br) : g.getYBottomFromBrick(br)) + ball.getRadius();
 			reverseXorY(XTrueYFalse);
 		}
+		return ret;
 	}
 
 	/**
@@ -150,14 +165,15 @@ public class BallController {
 			newCoord = calcCoordAfterBounce(newCoord,
 					getPositionXorY(XTrueYFalse), Direction, 0);
 			reverseXorY(XTrueYFalse);
-		} else if (newCoord + ball.getRadius() >= getWidthOrHeight(XTrueYFalse)) {
+		} else if (newCoord + ball.getRadius() >= getWidthOrHeight(XTrueYFalse) && XTrueYFalse) {
 			// Right OR Bottom border collision
 			newCoord = calcCoordAfterBounce(newCoord,
 					getPositionXorY(XTrueYFalse), Direction,
 					getWidthOrHeight(XTrueYFalse));
 			reverseXorY(XTrueYFalse);
-		} else if (newCoord + ball.getRadius() > mainFrame.getBar().getY()
-				+ mainFrame.getBar().getHeight()
+		} else if (/*newCoord - ball.getRadius() > mainFrame.getBar().getY()
+				+ mainFrame.getBar().getHeight()*/
+				newCoord + ball.getRadius() >= getWidthOrHeight(XTrueYFalse)
 				&& !XTrueYFalse) {
 
 			ball.killBall();

@@ -33,6 +33,7 @@ public class Bonus {
 	{
 		if(timer != null)
 		{
+			stopBonus();
 			timer.cancel();
 			timer.purge();
 			timer = null;

@@ -88,6 +88,7 @@ public class BrickController implements Observer{
 				ballController.incNbBrickTouche();
 				incScore(listOfBricks_alive.get(i).getBrickPointValue() * ballController.getNbBrickTouche());
 				listOfBricks_alive.remove(i);
+				i--;
 				
 				Game.playSound("smb_breakblock.wav");
 				
@@ -105,8 +106,8 @@ public class BrickController implements Observer{
 											 coordMorteY.get(randomInt).intValue(), 
 											 10)); //10 is the point value of the brick*/
 			listOfBricks_alive.add(BF.makeBrick(coordMorteX.get(randomInt), coordMorteY.get(randomInt)));
-			coordMorteX.remove(0);
-			coordMorteY.remove(0);
+			coordMorteX.remove(randomInt);
+			coordMorteY.remove(randomInt);
 			
 		}
 		

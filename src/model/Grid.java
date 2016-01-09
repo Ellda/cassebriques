@@ -52,7 +52,8 @@ public class Grid {
 	 * @return The X coordinate on the screen according to the brick's X coordinate in the grid
 	 */
 	public int getXLeftFromBrick(Brick brick){
-		return (getBrickWidth()*brick.getX()) ;
+		return (getBrickWidth()*brick.getX());
+		//return (int) (getBrickWidth()*(brick.getX() + (brick.getY() % 2 == 0 ? -.25: .25)));
 	}
 	
 	/**
@@ -61,15 +62,15 @@ public class Grid {
 	 * @return The Y coordinate on the screen according to the brick's Y coordinate in the grid
 	 */
 	public int getYTopFromBrick(Brick brick){
-		return (getBrickHeight()*brick.getY()) ;
+		return (getBrickHeight()*brick.getY());
 	}
 	
 	public int getBrickWidth(){
-		return (Executer.WIN_WIDTH/nbCasesX) ;
+		return (Executer.WIN_WIDTH/nbCasesX);
 	}
 	
 	public int getBrickHeight(){
-		return ((Executer.WIN_HEIGHT *2/3)/nbCasesY) ;
+		return ((Executer.WIN_HEIGHT *2/3)/nbCasesY);
 	}
 	
 	public int getYBottomFromBrick(Brick brick){

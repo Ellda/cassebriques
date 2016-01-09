@@ -2,8 +2,11 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +29,10 @@ import model.Grid;
  * @author Jonathan Diaz-Muy 13 041 479
  * @author Adrien Burel 14 126 607
  * @author Landry Modeste Goutondji  14 000 626
- * @author J�r�my Collard 14 129 766
+ * @author Jï¿½rï¿½my Collard 14 129 766
  * @author Mentor Bajraktari 14 129 757
  * @author Olivier Scheffler 12 179 288
- * @author Elliot G�mus-Pr�vost 13 111 198
+ * @author Elliot Gï¿½mus-Prï¿½vost 13 111 198
  * @author Samuel Arseneault 13 161 801
  * @author Djenebou Monique Dembele 10 103 210
  * @author Florent Gargot 14 129 784
@@ -159,18 +162,10 @@ public class MainFrame extends JPanel{
 
 		for (int i = 0; i < listOfBrick.size(); i++) {
 			Brick theBrick = listOfBrick.get(i);
-			gs.setColor(Color.WHITE);
-			try {
-				gs.fillRect(grid.getXLeftFromBrick(theBrick) + 1,
-						grid.getYTopFromBrick(theBrick) + 1, grid.getBrickWidth() - 2,
-						grid.getBrickHeight() - 2);
-
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			}
-
+			
 			gs.setColor(theBrick.getColor());
-			try {
+			//gs.setColor(new Color(.5f,.0f,.9f,.1f));
+			/*try {
 				if(gs==null)
 					System.out.println("GS null !!!");
 				gs.fillRect(grid.getXLeftFromBrick(theBrick) + 2,
@@ -180,8 +175,12 @@ public class MainFrame extends JPanel{
 			} catch (Exception e) {
 				System.err.println("paintBricks " + e.getMessage());
 				e.printStackTrace();
-			}
-
+			}*/
+			gs.fillRect(grid.getXLeftFromBrick(theBrick),
+					grid.getYTopFromBrick(theBrick), grid.getBrickWidth(),
+					grid.getBrickHeight());
+			gs.setColor(Color.WHITE);
+			gs.drawRect(grid.getXLeftFromBrick(theBrick), grid.getYTopFromBrick(theBrick), grid.getBrickWidth(), grid.getBrickHeight());
 		}
 
 		this.listOfBricks = listOfBrick;
@@ -193,12 +192,35 @@ public class MainFrame extends JPanel{
 			this.boList = boList;
 			if (gs == null)
 				gs = this.getGraphics();
+			// TODO : letters as static constant ?
+			String letters[] = {"B", "L", "S", "W"};
+			// Ball speed, Life, Score, bar Width
 			for (BonusObject bo : boList)
 			{
-				gs.setColor(Color.BLUE);
+				//bo.draw(gs);
 				double size = bo.getSize();
-				gs.fillOval((int) Math.round(bo.getX() - size), (int) Math.round(bo.getY() - size),
-						(int) Math.round(2 * size), (int) Math.round(2 * size));
+				int left = (int) Math.round(bo.getX() - size),
+					top = (int) Math.round(bo.getY() - size),
+					s = (int) Math.round(2 * size);
+				/*try
+				{
+					BufferedImage img = ImageIO.read(getClass().getClassLoader().getResource("pictures/bonus"+bo.getType()+".png"));
+					gs.drawImage(img,
+							left, top, left + s, top + s, 0, 0, img.getWidth(), img.getHeight(), null);
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}*/
+				gs.setColor(new Color(0f,0f,.5f,.7f));
+				gs.fillOval(left, top, s, s);
+				gs.setColor(Color.WHITE);
+				gs.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+		        FontMetrics fm = gs.getFontMetrics();
+		        Rectangle2D r = fm.getStringBounds(letters[bo.getType()], gs);
+		        int txtX = (int) Math.round(bo.getX() - r.getWidth() / 2);
+		        int txtY = (int) Math.round(bo.getY() - r.getHeight() / 2 + fm.getAscent());
+				gs.drawString(letters[bo.getType()], txtX, txtY);
 			}
 		}
 	}

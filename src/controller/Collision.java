@@ -45,6 +45,7 @@ public class Collision {
 	public boolean intersect_haut(Bar bar, double newY) {
 		Ball ball = mainFrame.getBall();
 		if (newY + ball.getRadius() > bar.getTopY()
+				&& newY - ball.getRadius() < bar.getTopY() + bar.getHeight()
 				&& ball.getY() + ball.getRadius() > bar.getTopY()) {
 			return bar.isWithinBarRange(ball.getX() - ball.getRadius(),
 					ball.getX() + ball.getRadius());
@@ -56,10 +57,9 @@ public class Collision {
 		ArrayList<Brick> listOfBricks = mainFrame.getBricks();
 		Ball ball = mainFrame.getBall();
 		for (Brick br : listOfBricks) {
-			if (grid.isWithinRangeX(br, newX - ball.getRadius(),
-					newX + ball.getRadius())
-					&& grid.isWithinRangeY(br, ball.getyTop(),
-							ball.getyBottom())) {
+			if (!br.isDead() &&
+				grid.isWithinRangeX(br, newX - ball.getRadius(), newX + ball.getRadius()) &&
+				grid.isWithinRangeY(br, ball.getyTop(), ball.getyBottom())) {
 				return br;
 			}
 		}
@@ -70,8 +70,9 @@ public class Collision {
 		ArrayList<Brick> listOfBricks = mainFrame.getBricks();
 		Ball ball = mainFrame.getBall();
 		for (Brick br : listOfBricks) {
-			if (grid.isWithinRangeY(br, newY - ball.getRadius(),
-					newY + ball.getRadius())
+			if (!br.isDead()
+					&& grid.isWithinRangeY(br, newY - ball.getRadius(),
+							newY + ball.getRadius())
 					&& grid.isWithinRangeX(br, ball.getxLeft(),
 							ball.getxRight())) {
 				return br;

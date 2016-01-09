@@ -99,14 +99,23 @@ public class BonusObjectController
 	
 	public void addBonusObject(BonusObject bo)
 	{
-		boList.add(bo);
+		synchronized (boList)
+		{
+			boList.add(bo);
+		}
 	}
 	public void removeBonusObject(BonusObject bo)
 	{
-		boList.remove(bo);
+		synchronized (boList)
+		{
+			boList.remove(bo);
+		}
 	}
 	public void clearBonusObjects()
 	{
-		boList.clear();
+		synchronized (boList)
+		{
+			boList.clear();
+		}
 	}
 }
