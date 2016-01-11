@@ -27,7 +27,7 @@ public class ConfigurationFrame extends JPanel{
 	private Configuration config;
 
 	public ConfigurationFrame() {
-		config = new Configuration("configuration/default.csv");
+		config = new Configuration();
 		
 		setLayout(new BorderLayout(0, 0));
 		

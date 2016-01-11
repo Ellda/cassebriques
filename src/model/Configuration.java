@@ -13,35 +13,31 @@ public class Configuration {
 	private boolean son;
 	
 	public Configuration() {
-		this("configuration/default.csv");
-	}
-	
-	
-
-	public Configuration(String confFile) {
-		this.configurationFile = confFile;
+		this.configurationFile = "configuration/default.csv";
 		try {
 			importConfig();
 		} catch (IOException e) {
 			defaultConfig();
 		}
+
 	}
 	
+	
 	private void importConfig() throws IOException {
-		FichierCSV monFichier = new FichierCSV(this.configurationFile);
-		List<String> liste = monFichier.readAll();
-		//try{
+		try{
+			FichierCSV monFichier = new FichierCSV(this.configurationFile);
+			List<String> liste = monFichier.readAll();
 			this.gauche = Integer.parseInt(liste.get(0).split(";")[1]);
 			this.droite = Integer.parseInt(liste.get(1).split(";")[1]);
 			this.quitter = Integer.parseInt(liste.get(2).split(";")[1]);
 			this.son = Boolean.parseBoolean(liste.get(3).split(";")[1]);
-		/*}
+		}
 		catch(Exception e){
 			defaultConfig();
-		}*/
+		}
 	}
 	
-	private void defaultConfig(){
+	public void defaultConfig(){
 		this.droite = KeyEvent.VK_RIGHT;
 		this.gauche = KeyEvent.VK_LEFT;
 		this.quitter = KeyEvent.VK_ESCAPE;
@@ -69,7 +65,7 @@ public class Configuration {
 		this.quitter = quitter;
 	}
 	public boolean isSon() {
-		return son;
+		return this.son;
 	}
 	public void setSon(boolean son) {
 		this.son = son;
