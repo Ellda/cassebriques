@@ -8,11 +8,6 @@ public class BrickFactory {
 	private int bonusRate;
 	private int strongRate;
 	private int strongMaxResistance;
-	/*private Color[] simpleBrickColorList = {
-			new Color(245,129,71), new Color(29,124,188), new Color(90,213,193),
-			new Color(152,213, 90), new Color(243, 243, 85), new Color(245, 187, 71), new Color(29,124,188)
-	};
-	private Color bonusBrickColor = new Color(255,255,255);*/
 	
 	public BrickFactory(Game game) {
 		this(game, 10, 20, 3);
@@ -26,6 +21,12 @@ public class BrickFactory {
 		this.strongMaxResistance = strongMaxResistance;
 	}
 	
+	/**
+	 * Creates a particular brick
+	 * @param i (int) : Position X of the brick
+	 * @param j (int) : Position Y of the brick
+	 * @return an instance of a Brick, Brick_bonus or Brick_strong.
+	 */
 	public Brick makeBrick(int i, int j){
 		int type = (int) Math.floor(Math.random() * 100);
 		if(type <= getBonusRate())
@@ -41,7 +42,8 @@ public class BrickFactory {
 	 */
 
 	public void setBonusRate(int bonusRate) {
-		this.bonusRate = bonusRate;
+		if(bonusRate > 0 && bonusRate < 100)
+			this.bonusRate = bonusRate;
 	}
 
 	public void setStrongRate(int strongRate) {
