@@ -29,9 +29,9 @@ public class BrickFactory {
 	 */
 	public Brick makeBrick(int i, int j){
 		int type = (int) Math.floor(Math.random() * 100);
-		if(type <= getBonusRate())
+		if(type < getBonusRate())
 			return new Brick_bonus(i, j, 20, game);
-		else if(type <= getBonusRate() + getStrongRate())
+		else if(type < getBonusRate() + getStrongRate())
 			return new Brick_strong(i, j, 30, getStrongMaxResistance());
 		else
 			return new Brick(i, j, 10);
@@ -42,16 +42,18 @@ public class BrickFactory {
 	 */
 
 	public void setBonusRate(int bonusRate) {
-		if(bonusRate > 0 && bonusRate < 100)
+		if(bonusRate >= 0 && bonusRate <= 100)
 			this.bonusRate = bonusRate;
 	}
 
 	public void setStrongRate(int strongRate) {
-		this.strongRate = strongRate;
+		if(strongRate >= 0 && strongRate <= 100)
+			this.strongRate = strongRate;
 	}
 
 	public void setStrongMaxResistance(int strongMaxResistance) {
-		this.strongMaxResistance = strongMaxResistance;
+		if(strongMaxResistance >= 1)
+			this.strongMaxResistance = strongMaxResistance;
 	}
 	/**
 	 * Getters

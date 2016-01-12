@@ -24,7 +24,7 @@ import org.junit.Test;
  * @author Florent Gargot 14 129 784
  */
 
-public class BrickTest {
+public class Old_BrickTest {
 
 	private Brick brick;
 	

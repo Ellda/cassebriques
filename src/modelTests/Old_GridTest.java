@@ -26,7 +26,7 @@ import org.junit.Test;
  * @author Florent Gargot 14 129 784
  */
 
-public class GridTest {
+public class Old_GridTest {
 
 	private Grid grid ;
 	private Brick brick ;
