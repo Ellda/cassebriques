@@ -112,7 +112,7 @@ public class GameController {
 		game.setBarController(new BarController(game.getBar(), getView()));
 		game.setBrickController(new BrickController(getGame(), getView()));
 		game.setBonusObjectController(new BonusObjectController(getGame(), getView()));
-		game.getBrickController().setBricksSquare();
+		game.getBrickController().setBricksPattern();
 		game.getBall().addObserver(game.getBrickController());
 		// Informs the view
 		view.setBall(game.getBall());

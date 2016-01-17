@@ -5,6 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
 import model.BrickFactory;
 import model.Brick;
 import model.Game;
@@ -43,6 +45,10 @@ public class BrickController implements Observer{
 	
 	private BrickFactory BF;
 	
+	// Pattern
+	// 0:square 1:circle
+	private int brickPattern;
+
 	//Score 
 	private int score;
 	
@@ -55,10 +61,24 @@ public class BrickController implements Observer{
 		this.mainFrame = mainFrame;
 		score = 0;
 		BF = new BrickFactory(game);
+		setBrickPattern(1);
 	}
 	
-	
-
+	/**
+	 *  Calls a pattern creator for bricks
+	 */
+	public void setBricksPattern(){
+		switch (getBrickPattern()){
+			case 0:
+				setBricksSquare();
+				break;
+			case 1:
+				setBricksCircle();
+				break;
+			default:
+				setBricksSquare();
+		}
+	}
 	
 	/**
 	 *  Create a squared pattern of bricks.
@@ -72,6 +92,28 @@ public class BrickController implements Observer{
 			for(int j = 1 ; j < grid.getNbCasesY() - 3; j++){
 				listOfBricks_alive.add(BF.makeBrick(i, j));
 			}
+	}
+	
+	/**
+	 *  Create a circled pattern of bricks.
+	 *  Initially, the score given by a brick is 10.
+	 */
+	public void setBricksCircle(){
+		System.out.println("TEST");
+		//int bType;
+		this.removeAllBricks();
+		
+		for(int i = 2 ; i < grid.getNbCasesX() - 2 ; i++){
+			listOfBricks_alive.add(BF.makeBrick(i, 1));
+			listOfBricks_alive.add(BF.makeBrick(i, grid.getNbCasesY() - 2));
+			listOfBricks_alive.add(BF.makeBrick(i, 2));
+			listOfBricks_alive.add(BF.makeBrick(i, grid.getNbCasesY() - 3));
+		}
+		
+		for(int j = 2 ; j < grid.getNbCasesY() - 2; j++){
+			listOfBricks_alive.add(BF.makeBrick(1, j));
+			listOfBricks_alive.add(BF.makeBrick(grid.getNbCasesX() - 2, j));
+		}
 	}
 	
 	public void removeDeadBricks(){
@@ -113,7 +155,7 @@ public class BrickController implements Observer{
 		
 		if(getlistOfBricks_alive().size() == 2)
 		{
-			setBricksSquare();
+			setBricksPattern();
 		}
 
 	}
@@ -154,9 +196,8 @@ public class BrickController implements Observer{
 
 			//Brute Method: we remove all of the bricks
 			//before filling the grid once again
-		
-;			removeAllBricks();
-			setBricksSquare();
+			removeAllBricks();
+			setBricksPattern();
 		}	
 	}
 	
@@ -175,5 +216,13 @@ public class BrickController implements Observer{
 	public void setScore(int score) {
 		this.score = score;
 	}	
+	
+	public int getBrickPattern() {
+		return brickPattern;
+	}
+
+	public void setBrickPattern(int brickPattern) {
+		this.brickPattern = brickPattern;
+	}
 	
 }

@@ -42,9 +42,10 @@ public class Brick {
 	}
 	
 	public void setColor(){
-		Color[] colorList = {new Color(245,129,71), new Color(29,124,188), new Color(90,213,193),
+		/*Color[] colorList = {new Color(245,129,71), new Color(29,124,188), new Color(90,213,193),
 				new Color(152,213, 90), new Color(243, 243, 85), new Color(245, 187, 71), new Color(29,124,188) };
-		setColor(colorList[(getY()) % 6]);
+		setColor(colorList[(getY()) % 6]);*/
+		setColor(new Color(29,124,188));
 	}
 	
 	public void setColor(Color c){
