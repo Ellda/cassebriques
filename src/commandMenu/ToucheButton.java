@@ -33,12 +33,16 @@ public class ToucheButton  implements KeyListener, ActionListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		  System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
-		  this.button.setText(KeyEvent.getKeyText(e.getKeyCode()));
+		  //System.out.println("Key pressed code=" + e.getExtendedKeyCode() + ", char=" + e.getKeyChar() + " " + KeyEvent.getKeyText(e.getKeyCode()));
+		  String touche = KeyEvent.getKeyText(e.getKeyCode());
+		  if (touche.equals("Inconnu keyCode: 0x0"))
+			  this.button.setText(""+e.getKeyChar());
+		  else
+			  this.button.setText(KeyEvent.getKeyText(e.getKeyCode()));
 		  switch(this.numTouchePresse) {
-		  case 0:  this.cfg.setGauche(e.getKeyCode());  break;
-		  case 1:  this.cfg.setDroite(e.getKeyCode());  break;
-		  case 2:  this.cfg.setQuitter(e.getKeyCode());  break;
+		  case 0:  this.cfg.setGauche(e.getExtendedKeyCode());  break;
+		  case 1:  this.cfg.setDroite(e.getExtendedKeyCode());  break;
+		  case 2:  this.cfg.setQuitter(e.getExtendedKeyCode());  break;
 		}
 	    	JPanel grandparent = (JPanel)this.button.getParent().getParent();
 	    	JFrame parentFrame = (JFrame) grandparent.getRootPane().getParent();
