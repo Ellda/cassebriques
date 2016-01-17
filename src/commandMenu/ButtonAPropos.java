@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 
 public class ButtonAPropos extends Command { 
    private static String text = 
-		    "<html><h1><span style='font-size: medium;'>&Eacute;quipe de d&eacute;veloppement</span></h1>" +
+		    "<html><h1><span style='font-size: medium;'>Equipes de d&eacute;veloppement</span></h1>" +
 		    "<h2><span style='font-size: medium;'>Version 1.0</span></h2>" +
 		    "<ul>" +  
 			"<li><span style='color: #333399;'><strong>Antoine Fonfria</strong></span></li>" + 
@@ -48,7 +48,7 @@ public class ButtonAPropos extends Command {
    
 	@Override
 	protected void executeImpl() {
-		JOptionPane.showMessageDialog(null, text, "� propos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, text, "A propos", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }
