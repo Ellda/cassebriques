@@ -216,10 +216,10 @@ public class MainFrame extends JPanel{
 				gs.fillOval(left, top, s, s);
 				gs.setColor(Color.WHITE);
 				gs.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-		        FontMetrics fm = gs.getFontMetrics();
-		        Rectangle2D r = fm.getStringBounds(letters[bo.getType()], gs);
-		        int txtX = (int) Math.round(bo.getX() - r.getWidth() / 2);
-		        int txtY = (int) Math.round(bo.getY() - r.getHeight() / 2 + fm.getAscent());
+				FontMetrics fm = gs.getFontMetrics();
+				Rectangle2D r = fm.getStringBounds(letters[bo.getType()], gs);
+				int txtX = (int) Math.round(bo.getX() - r.getWidth() / 2);
+				int txtY = (int) Math.round(bo.getY() - r.getHeight() / 2 + fm.getAscent());
 				gs.drawString(letters[bo.getType()], txtX, txtY);
 			}
 		}
@@ -248,5 +248,8 @@ public class MainFrame extends JPanel{
 
 	public void setBonusObjectsList(List<BonusObject> boList) {
 		this.boList = boList;
+	}
+	public List<BonusObject> getBonusObjectsList() {
+		return boList;
 	}
 }

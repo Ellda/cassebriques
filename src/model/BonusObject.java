@@ -64,22 +64,4 @@ public class BonusObject
 	public void setSize(double size){
 		this.size = size;
 	}
-	
-	/*public void draw(Graphics g)
-	{
-		g.setColor(new Color(0f,.5f,.2f,1f));
-		int left = (int) Math.round(x - size),
-			top = (int) Math.round(y - size);
-		int s = (int) Math.round(2 * size);//, rad = (int) Math.round(size / 2);
-		//g.fillRoundRect(left, top, s, s, rad, rad);
-		g.fillOval(left, top, s, s);
-		
-		g.setColor(Color.WHITE);
-		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
-        FontMetrics fm = g.getFontMetrics();
-        Rectangle2D r = fm.getStringBounds(LETTERS[type], g);
-        int txtX = (int) (x - r.getWidth() / 2);
-        int txtY = (int) (y - r.getHeight() / 2 + fm.getAscent());
-		g.drawString(LETTERS[type], txtX, txtY);
-	}*/
 }
