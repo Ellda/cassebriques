@@ -19,6 +19,7 @@ public class ConfigurationTest {
 
 	@After
 	public void tearDown() throws Exception {
+		config.defaultConfig();
 	}
 
 	@Test
@@ -47,6 +48,15 @@ public class ConfigurationTest {
 	public void testSetGetQuitter() {		
 		config.setQuitter(3);
 		assertEquals(3, config.getQuitter());
+	}
+	
+	@Test
+	public void testSetGetNegatif() {		
+		config.setGauche(124);
+		assertEquals(124, config.getGauche());
+		config.setGauche(-3);
+		assertEquals(124, config.getGauche());
+
 	}
 	
 	@Test

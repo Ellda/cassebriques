@@ -50,19 +50,22 @@ public class Configuration {
 		return gauche;
 	}
 	public void setGauche(int gauche) {
-		this.gauche = gauche;
+		if(gauche > 0)
+			this.gauche = gauche;
 	}
 	public int getDroite() {
 		return droite;
 	}
 	public void setDroite(int droite) {
-		this.droite = droite;
+		if(droite > 0)
+			this.droite = droite;
 	}
 	public int getQuitter() {
 		return quitter;
 	}
 	public void setQuitter(int quitter) {
-		this.quitter = quitter;
+		if(quitter > 0)
+			this.quitter = quitter;
 	}
 	public boolean isSon() {
 		return this.son;
