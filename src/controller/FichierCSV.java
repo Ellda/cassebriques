@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,10 +25,18 @@ public class FichierCSV {
 		Files.write(file, lines, Charset.forName("UTF-8"));
 	}
 	
-	public List<String> readAll() throws IOException, URISyntaxException {
+	public List<String> readAll() throws NullPointerException, IOException, URISyntaxException {
 		ClassLoader classLoader = getClass().getClassLoader();
-		Path file = Paths.get(classLoader.getResource(this.nomFichier).toURI());
-		List<String> lines = Files.readAllLines(file, Charset.forName("UTF-8"));
+		if(classLoader == null)
+			System.out.println("caca");
+		URL fichier = classLoader.getResource(this.nomFichier);
+		if(fichier == null)
+			throw new IOException();
+	
+		Path path = Paths.get(fichier.toURI());
+		if(path == null)
+			System.out.println("pipi");
+		List<String> lines = Files.readAllLines(path, Charset.forName("UTF-8"));
 		return lines;
 	}
 	
