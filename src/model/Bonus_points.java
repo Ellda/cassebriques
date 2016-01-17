@@ -5,6 +5,18 @@ public class Bonus_points extends Bonus{
 	private double coeff;
 	private int previousScore;
 	
+	public double getCoeff() {
+		return coeff;
+	}
+
+	public void setCoeff(double coeff) {
+		this.coeff = coeff;
+	}
+
+	public int getPreviousScore() {
+		return previousScore;
+	}
+
 	public Bonus_points(Game game) {
 		super(game);
 		coeff = 2;

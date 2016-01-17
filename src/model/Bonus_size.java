@@ -4,6 +4,14 @@ public class Bonus_size extends Bonus{
 
 	private int addValue;
 	
+	public int getAddValue() {
+		return addValue;
+	}
+
+	public void setAddValue(int addValue) {
+		this.addValue = addValue;
+	}
+
 	public Bonus_size(Game game) {
 		super(game);
 		addValue = 50;

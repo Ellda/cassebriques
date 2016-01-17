@@ -16,6 +16,14 @@ public class Bonus_ballSpeed extends Bonus{
 		super.launchBonus();
 	}
 	
+	public double getCoeff() {
+		return coeff;
+	}
+
+	public void setCoeff(double coeff) {
+		this.coeff = coeff;
+	}
+
 	@Override
 	protected void stopBonus()
 	{

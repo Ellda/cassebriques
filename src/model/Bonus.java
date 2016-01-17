@@ -7,6 +7,14 @@ public class Bonus {
 	
 	protected Game game;
 	protected int delay;
+	public int getDelay() {
+		return delay;
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
+
 	private Timer timer;
 
 	public Bonus(Game game) {
