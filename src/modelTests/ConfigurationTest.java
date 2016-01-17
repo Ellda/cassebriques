@@ -3,6 +3,7 @@ package modelTests;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,15 +12,18 @@ import model.Configuration;
 
 public class ConfigurationTest {
 	private Configuration config;
+	private Configuration configSav;
+
 	
 	@Before
 	public void setUp() throws Exception {
 		config = new Configuration();
+		configSav = new Configuration(config); // backup de la config actuelle
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		config.defaultConfig();
+		configSav.save();
 	}
 
 	@Test
@@ -75,7 +79,7 @@ public class ConfigurationTest {
 		config.setSon(true);
 		try {
 			config.save();
-		} catch (IOException e) {
+		} catch (IOException | URISyntaxException e) {
 			fail("sauvegarde impossible");
 		}
 		
@@ -92,7 +96,7 @@ public class ConfigurationTest {
 		cfgNew.setSon(false);
 		try {
 			cfgNew.save();
-		} catch (IOException e) {
+		} catch (IOException | URISyntaxException e) {
 			fail("sauvegarde impossible");
 		}
 		

@@ -13,48 +13,22 @@ import java.util.List;
 public class FichierCSV {
 	
 	private String nomFichier;
-	//private String nomDefault;
 	
 	public FichierCSV(String nom){
-		this(nom, nom);
-	}
-	
-	public FichierCSV(String nom, String nomDefault){
 		this.nomFichier = nom;
-		//this.nomDefault= nomDefault;
-
 	}
 	
-	
-	public void writeAndReplace(List<String> lines) throws IOException{
+	public void writeAndReplace(List<String> lines) throws IOException, URISyntaxException{
 		ClassLoader classLoader = getClass().getClassLoader();
-		try
-		{
-			Path file = Paths.get(classLoader.getResource(this.nomFichier).toURI());
-			Files.write(file, lines, Charset.forName("UTF-8"));
-		}
-		catch (URISyntaxException e)
-		{
-			// TODO : error handling
-			e.printStackTrace();
-		}
+		Path file = Paths.get(classLoader.getResource(this.nomFichier).toURI());
+		Files.write(file, lines, Charset.forName("UTF-8"));
 	}
 	
-	public List<String> readAll() throws IOException {
+	public List<String> readAll() throws IOException, URISyntaxException {
 		ClassLoader classLoader = getClass().getClassLoader();
-		//Path file = Paths.get(URLDecoder.decode(classLoader.getResource(this.nomFichier).getFile(), "UTF-8" ));
-		try
-		{
-			Path file = Paths.get(classLoader.getResource(this.nomFichier).toURI());
-			List<String> lines = Files.readAllLines(file, Charset.forName("UTF-8"));
-			return lines;
-		}
-		catch (URISyntaxException e)
-		{
-			// TODO : error handling
-			e.printStackTrace();
-		}
-		return new ArrayList<String>();
+		Path file = Paths.get(classLoader.getResource(this.nomFichier).toURI());
+		List<String> lines = Files.readAllLines(file, Charset.forName("UTF-8"));
+		return lines;
 	}
 	
 }

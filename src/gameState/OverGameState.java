@@ -8,7 +8,9 @@ import controller.GameController;
 
 import model.Game;
 
+import java.awt.HeadlessException;
 import java.io.*;
+import java.net.URISyntaxException;
 //import java.net.URLDecoder;
 import java.util.*;
 
@@ -53,7 +55,11 @@ public class OverGameState implements GameState {
 		// Computation of scores
 		
 		
-		JOptionPane.showMessageDialog(gameController.getView(),computeScores("scores/bestscores.csv"));
+		try {
+			JOptionPane.showMessageDialog(gameController.getView(),computeScores("scores/bestscores.csv"));
+		} catch (HeadlessException | URISyntaxException e) {
+			JOptionPane.showMessageDialog(gameController.getView(), "impossible de charger le tableau des scores", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
 
 		// Ask window if new game
 		int option = JOptionPane.showConfirmDialog(gameController.getView(),
@@ -78,34 +84,36 @@ public class OverGameState implements GameState {
 	 * Fonction qui rÃ©cupÃ¨re le score final pour l'enregistrer avec le pseudo du joueur
 	 * @param scoresFile , String, contient le chemin du fichier dans les ressources
 	 * @return panel, une fenÃªtre pop-up dans laquelle on voit les scores
+	 * @throws URISyntaxException 
 	 */
-	private JPanel computeScores(String scoresFile) {
+	private JPanel computeScores(String scoresFile) throws URISyntaxException {
 		
 		//score corresponds au score final de la partie
 		int score = gameController.getGame().getBrickController().getScore();
 		
-		//On créé une JTable contenant les scores
+		//On crï¿½ï¿½ une JTable contenant les scores
 		JTable table_scores = getScoresFromFile(scoresFile, score);
 		
-		//On met le tableau des scores dans une fenêtre déroulante
+		//On met le tableau des scores dans une fenï¿½tre dï¿½roulante
 		JScrollPane spTable = new JScrollPane(table_scores);
 		
-		//On créé une fenêtre pop-up
+		//On crï¿½ï¿½ une fenï¿½tre pop-up
 		JPanel panel = new JPanel();
 		
-		//On ajoute la fenêtre déroulante dans la fenêtre pop-up
+		//On ajoute la fenï¿½tre dï¿½roulante dans la fenï¿½tre pop-up
 		panel.add(spTable);
 		
 		return panel;
 	}
 	
 	/**
-	 * Fonction qui lit le fichier des scores puis ajoute le score à ceux-ci
+	 * Fonction qui lit le fichier des scores puis ajoute le score ï¿½ ceux-ci
 	 * @param resource, le chemin vers le fichier dans les ressources
-	 * @param score, le score du joueur à la fin du jeu
+	 * @param score, le score du joueur ï¿½ la fin du jeu
 	 * @return table, une JTable contenant les scores avec le nouveau ajoutÃ©
+	 * @throws URISyntaxException 
 	 */
-	private JTable getScoresFromFile(String resource, int score) {
+	private JTable getScoresFromFile(String resource, int score) throws URISyntaxException {
 		
 		FichierCSV f = new FichierCSV(resource);
 
@@ -113,14 +121,14 @@ public class OverGameState implements GameState {
 		
 		String pseudoDefaut = "PSEUDO";
 		
-		//Liste qui va recupérer les scores
+		//Liste qui va recupï¿½rer les scores
 		List<String[]> scores = new ArrayList<String[]>();
 
 		try {
 			//Get file from resources folder
 			List<String> listeScore = f.readAll();
 			
-			//Tant que la ligne lue n'est pas "null" on ajoute la ligne à la liste des scores. La ligne est de la forme : "pseudo;score"
+			//Tant que la ligne lue n'est pas "null" on ajoute la ligne ï¿½ la liste des scores. La ligne est de la forme : "pseudo;score"
 
 			for (String item : listeScore) {
 				String[] record= item.split(";");
@@ -137,17 +145,17 @@ public class OverGameState implements GameState {
 			e.printStackTrace();
 		}
 		
-		// On affiche une fenêtre pour demander le pseudo du joueur
+		// On affiche une fenï¿½tre pour demander le pseudo du joueur
 		String s = (String)JOptionPane.showInputDialog(
 				gameController.getView(),
 				"Entrez votre pseudo pour sauvegarder votre score:\n",
-				"Félicitations. Score = " + String.valueOf(score),
+				"Fï¿½licitations. Score = " + String.valueOf(score),
 				JOptionPane.PLAIN_MESSAGE,
 				null,
 				null,
 				pseudoDefaut);
 		
-		//On ajoute le score à la liste des scores
+		//On ajoute le score ï¿½ la liste des scores
 		if ((s != null) && (s.length() > 0)) {
 			String[] toAdd = new String[2];
 			toAdd[1] = String.valueOf(score);
@@ -155,7 +163,7 @@ public class OverGameState implements GameState {
 			scores.add(toAdd);
 		}
 		
-		//On trie la liste des scores pour ordonner le dernier score ajouté
+		//On trie la liste des scores pour ordonner le dernier score ajoutï¿½
 		Collections.sort(scores, new Comparator<String[]>() {
 
 			@Override

@@ -2,6 +2,7 @@ package model;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,13 @@ public class Configuration {
 		}
 
 	}
-	
+	public Configuration(Configuration cfg) {
+		this.configurationFile = cfg.configurationFile;
+		this.gauche = cfg.gauche;
+		this.droite = cfg.droite;
+		this.quitter = cfg.quitter;
+		this.son = cfg.son;
+	}
 	
 	private void importConfig() throws IOException {
 		try{
@@ -84,7 +91,7 @@ public class Configuration {
 		
 	}
 	
-	public void save() throws IOException{
+	public void save() throws IOException, URISyntaxException{
 		FichierCSV monFichier = new FichierCSV(this.configurationFile);
 		monFichier.writeAndReplace(this.exportLines());
 	}

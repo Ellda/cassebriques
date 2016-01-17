@@ -9,6 +9,7 @@ import gameState.PlayingGameState;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -194,9 +195,8 @@ public class GameController {
 				gameConfig.toggleSon();
 				try {
 					gameConfig.save();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (IOException | URISyntaxException e1) {
+					// rien a faire, ça n'est pas grave ici si la configuration ne peut pas être sauvegardé.
 				}
 			}
 		}

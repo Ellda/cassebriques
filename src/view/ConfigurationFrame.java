@@ -17,6 +17,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 
@@ -104,7 +106,7 @@ public class ConfigurationFrame extends JPanel{
 			    	JFrame parentFrame = (JFrame) grandparent.getRootPane().getParent();
 			    	parentFrame.dispose();
 			    	
-				} catch (IOException e1) {
+				} catch (IOException | URISyntaxException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, "Impossible d'enregistrer la configuration, le système est peut-etre occupé. Veuillez reessayez plus tards.");
 
